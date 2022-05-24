@@ -1,0 +1,97 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Add - Agenda {% endblock %} 
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+        <!-- [ breadcrumb ] start -->
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title">
+                            <h5 class="m-b-10">Postar uma publicação</h5>
+                        </div>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/dashboard"><i class="feather icon-home"></i></a></li>
+                            <li class="breadcrumb-item"><a href="javascript:">Post</a></li>
+                            <li class="breadcrumb-item"><a href="javascript:">Adiconar Post</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-body">
+            <div class="page-wrapper">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Formulario</h5>
+                            </div>
+                            <form id="form" method="post" action="submit" enctype="multipart/form-data">  {% csrf_token %}
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group" style="margin-left:3vw">
+                                            <label>Title</label>
+                                            <input type="text" id="nome" class="form-control" name="title" placeholder="Digite o titulo do post">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="fileinput" style="cursor:pointer;" >
+                                                Imagem: 
+                                                <img width="50" src="/static/img/adicionar-imagem.png" >
+                                            </label>
+                                            <input type="file" onChange="mostrar_nome_imagem(this.value)" style="display:none" id="fileinput" class="form-control" name="image">
+                                            <div id="name_img">
+                                            
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            {{form.media}}
+                                            {{form}}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group" style="margin-left:3vw">
+                                            <button type="submit" class="btn btn-primary">Adicionar</button>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    let form = document.getElementById('form'); 
+
+    function mostrar_nome_imagem(nome){
+        var div = document.getElementById('name_img')
+        div.innerText =  nome.split('\\').pop()
+    }
+
+</script>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+{% endblock javascripts %}

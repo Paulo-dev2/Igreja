@@ -1,0 +1,97 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Add - Agenda {% endblock %} 
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+        <!-- [ breadcrumb ] start -->
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title">
+                            <h5 class="m-b-10">Adiconar Agenda</h5>
+                        </div>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/dashboard"><i class="feather icon-home"></i></a></li>
+                            <li class="breadcrumb-item"><a href="javascript:">Agenda</a></li>
+                            <li class="breadcrumb-item"><a href="javascript:">Adiconar Agenda</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-body">
+            <div class="page-wrapper">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Formulario</h5>
+                            </div>
+                            <form id="form" method="post"> {% csrf_token %}
+                                <div class="row">
+                                    <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Nome</label>
+                                                <input type="text" id="nome" class="form-control" name="nome_agenda" placeholder="Digite o nome da agenda">
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Adicionar</button>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Data e Horario de inicio</label>
+                                            <input name="data_agenda_start" id="dt_start" type="datetime-local" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    let form = document.getElementById('form'); 
+
+    form.addEventListener('submit', function(event) { // 1
+        event.preventDefault()
+        
+        let data = new FormData(); // 2
+        
+        data.append("nome_agenda", document.getElementById('nome').value)  
+        data.append("data_agenda_start", document.getElementById('dt_start').value)
+        data.append("csrfmiddlewaretoken", '{{csrf_token}}') // 3
+        
+        axios.post('/dashboard/add-agenda/', data) 
+         .then( (res) => {
+            if(res.data.sucess) {
+                alert("Criado com sucesso");
+                window.location.href = "/dashboard/pages/listar-agenda"
+            }else{
+                alert(res.data.err)
+            }
+         })
+         .catch(errors => console.log(errors)) 
+    
+    })
+
+</script>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+{% endblock javascripts %}

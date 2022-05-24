@@ -1,0 +1,72 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Add - Agenda {% endblock %} 
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title">
+                            <h5 class="m-b-10">Listar as publicações</h5>
+                        </div>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/dashboard"><i class="feather icon-home"></i></a></li>
+                            <li class="breadcrumb-item"><a href="javascript:">Post</a></li>
+                            <li class="breadcrumb-item"><a href="javascript:">Listar Post</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-body">
+            <div class="page-wrapper">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Listagem</h5>
+                            </div>
+                                
+                            </div>
+                            <form id="form" method="post"> {% csrf_token %}
+                        </div>
+
+                        
+                        {% for p in post %}
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="col-md-3">
+                                    <div class="card" style="width: 17rem;">
+                                        <img class="card-img-top" style="height:30vh" src="{{media_url}}{{p.image}}" alt="Imagem de capa do card">
+                                        <div class="card-body">
+                                        {% comment %} {{p.text | safe }} {% endcomment %}
+                                        <p>Author: {{p.author}}</p>
+                                        <p>Data de criação: {{p.post_date}}</p>
+                                        <p>Titulo: {{p.title}}</p>
+                                        <a href="/dashboard/details-post/{{p.id}}" class="label theme-bg text-white f-12">Details</a>
+                                        <a href="#!" class="label theme-bg2 text-white f-12">Deletar</a>
+                                        <a href="#!" class="label theme-bg text-white f-12">Editar</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

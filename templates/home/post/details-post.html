@@ -1,0 +1,54 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Details Post {% endblock %} 
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+        <!-- [ breadcrumb ] start -->
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title">
+                            <h5 class="m-b-10">Details Post</h5>
+                        </div>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/dashboard/"><i class="feather icon-home"></i></a></li>
+                            <li class="breadcrumb-item"><a href="/dashboard/pages/listar-post">Details</a></li>
+                            <li class="breadcrumb-item"><a href="javascript:">Post</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-body">
+            <div class="page-wrapper">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Visualização</h5>
+                                <p>Author: {{post.author}}</p>
+                            </div>
+                        </div>
+                        <img class="card-img-top" style="height:50vh" src="/media/{{post.image}}" alt="Imagem de capa do card">
+                        <div class="form-group">
+                            <h1>{{post.title}}</h1>
+                        <hr/>
+                            {{post.text | safe}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    </div>
+</div>
+
+{% endblock %}

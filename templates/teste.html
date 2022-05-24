@@ -1,0 +1,10 @@
+{% extends "model-page.html" %}
+
+{% block content %}
+    <h1>Agendas</h1>
+    <ul>
+        {% for ag in agenda %}
+            <li>{{ ag.name }} - {{ ag.get_data_agenda }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
