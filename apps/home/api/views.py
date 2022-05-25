@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.urls import reverse
-from core.models import Agenda,Evento,Dizimo,Oferta
+from core.models import Agenda,Evento,Dizimo,Oferta,Post
 from datetime import datetime
 from django.core.paginator import Paginator,EmptyPage, PageNotAnInteger
 
@@ -163,4 +163,90 @@ class Dashboard:
                 Dizimo.objects.filter(id=id).delete()
                 return redirect("/dashboard/pages/listar-dizimo")
             return redirect("/dashboard/pages/listar-dizimo")
+
+    @login_required(login_url="/dashboard/login/")
+    def add_oferta(req):
+        if req.method == 'POST':
+            nome = req.POST.get('nome')
+            cpf = req.POST.get('cpf')
+            tel = req.POST.get('tel')
+            valor = req.POST.get('value')
+            token = req.POST.get('csrfmiddlewaretoken')
+
+            if not token: 
+                return HttpResponse({
+                    "err":"Não existe token"
+                })
+            if cpf and valor:
+                if nome and tel: 
+                    if len(nome) < 4:
+                            return JsonResponse({
+                            "err":"Tamanho do nome oferta muito pequena"
+                        },safe=False)
+                    else:
+                        Oferta.objects.create(name=nome,cpf=cpf,tel=tel,value=valor)
+                        return JsonResponse({
+                            "sucess":"adicionado com sucesso com sucesso"
+                        },safe=False)
+                else:
+                    return JsonResponse({
+                        "err":"Está faltando nome ou telefone"
+                    },safe=False)
+            else:
+                return JsonResponse({
+                    "err":"Está faltando cpf ou valor"
+                },safe=False)
+
+    @login_required(login_url="/dashboard/login/")
+    def EditarOferta(req):
+        if req.method == 'POST':
+            print(req.POST)
+            nome = req.POST.get('nome')
+            cpf = req.POST.get('cpf')
+            tel = req.POST.get('tel')
+            valor = req.POST.get('value')
+            id = req.POST.get('id')
+            token = req.POST.get('csrfmiddlewaretoken')
+
+            if not token: 
+                return HttpResponse({
+                    "err":"Não existe token"
+                })
+            if cpf and valor:
+                if nome and tel: 
+                    if len(nome) < 4:
+                            return JsonResponse({
+                            "err":"Tamanho do nome oferta muito pequena"
+                        },safe=False)
+                    else:
+                        Oferta.objects.filter(id=id).update(name=nome,cpf=cpf,tel=tel,value=valor)
+                        return JsonResponse({
+                            "sucess":"Editado com sucesso com sucesso"
+                        },safe=False)
+                else:
+                    return JsonResponse({
+                        "err":"Está faltando nome ou telefone"
+                    },safe=False)
+            else:
+                return JsonResponse({
+                    "err":"Está faltando cpf ou valor"
+                },safe=False) 
+
+    @login_required(login_url="/dashboard/login/")
+    def deletar_oferta(req,id):
+        if req.method == "GET":
+            
+            if id != 0:
+                Oferta.objects.filter(id=id).delete()
+                return redirect("/dashboard/pages/listar-oferta")
+            return redirect("/dashboard/pages/listar-oferta")
+
+    @login_required(login_url="/dashboard/login/")
+    def deletar_post(req,id):
+        if req.method == "GET":
+            
+            if id != 0:
+                Post.objects.filter(id=id).delete()
+                return redirect("/dashboard/pages/listar-post")
+            return redirect("/dashboard/pages/listar-post")
                 

@@ -1,3 +1,4 @@
+from gc import get_objects
 from django.shortcuts import render,HttpResponse,redirect
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
@@ -62,26 +63,90 @@ class Pages:
                 return render(req,'home/dizimo/editar-dizimo.html',dados)
 
     @login_required(login_url="/dashboard/login/")
-    def addPost(req):
+    def addOferta(req):
         if req.method == 'GET':
-            form = PostForm()
-            context = {'form':form}
-            html_template = loader.get_template('home/post/' + "add-post" + ".html")
+            context = {}
+            html_template = loader.get_template('home/oferta/' + "add-oferta" + ".html")
             return HttpResponse(html_template.render(context, req))
 
     @login_required(login_url="/dashboard/login/")
+    def listarOferta(req):
+        if req.method == 'GET':
+            oferta = Oferta.objects.all()
+            context = {
+                'oferta': oferta,
+            }
+
+            return render(req,'home/oferta/listar-oferta.html',context)
+
+    @login_required(login_url="/dashboard/login/")
+    def editarOferta(req,id):
+        if req.method == 'GET':
+            if id != 0:
+                dados = {}
+                dados['oferta'] = Oferta.objects.get(id=id)
+                return render(req,'home/oferta/editar-oferta.html',dados)
+
+    @login_required(login_url="/dashboard/login/")
+    def addPost(req):
+        if req.method == 'POST':
+            form = PostForm(req.POST)
+            context = {'form':form}
+           
+        else:
+            form = PostForm()
+            context = {'form':form}
+        html_template = loader.get_template('home/post/' + "add-post" + ".html")
+        return HttpResponse(html_template.render(context, req))
+
+    @login_required(login_url="/dashboard/login/")
     def addPostData(req):
+        id = req.POST.get('id')
         title = req.POST.get('title')
         img = req.FILES.get('image')
         text = req.POST.get('text')
         user = req.user
+
+
         if req.method == 'POST':
-            if img:
-                if title:
-                    if text:
-                        if req.POST.get('csrfmiddlewaretoken'):
-                            Post.objects.create(title=title,author=user,image=img,text=text)
-                            return redirect("/dashboard/pages/listar-post/")
+            if id:
+                if img:
+                    if title:
+                        if text:
+                            if req.POST.get('csrfmiddlewaretoken'):
+                                obj = Post.objects.get(id=id)
+                                obj.image = img
+                                obj.title = title
+                                obj.text = text
+                                obj.save()
+                                #Post.objects.filter(id=id).update(title=title,author=user,image=img,text=text)
+                                messages.success(req, "Produto Atualizado com sucesso")
+                                return redirect("/dashboard/pages/listar-post/")
+                        else:
+                            messages.success(req, "Erro no text")
+                            return redirect("/dashboard/pages/edit-post/")
+                    else:
+                        messages.success(req, "É obrigado a ter titulo!!")
+                        return redirect("/dashboard/pages/edit-post/")
+                else:
+                    messages.success(req, "É obrigado a ter imagem!!")
+                    return redirect(f"/dashboard/pages/editar-post/{id}")
+            else:
+                if img:
+                    if title:
+                        if text:
+                            if req.POST.get('csrfmiddlewaretoken'):
+                                Post.objects.create(title=title,author=user,image=img,text=text)
+                                return redirect("/dashboard/pages/listar-post/")
+                        else:
+                            messages.success(req, "Erro no text")
+                            return redirect("/dashboard/pages/edit-post/")
+                    else:
+                        messages.success(req, "É obrigado a ter titulo!!")
+                        return redirect("/dashboard/pages/edit-post/")
+                else:
+                    messages.success(req, "É obrigado a ter imagem!!")
+                    return redirect(f"/dashboard/pages/editar-post/{id}")
 
     @login_required(login_url="/dashboard/login/")
     def ListarPost(req):
@@ -100,6 +165,17 @@ class Pages:
             dados = {}
             dados['post'] = Post.objects.get(id=id)
             return render(req,'home/post/details-post.html',dados)
+
+    @login_required(login_url="/dashboard/login/")
+    def editarPost(req,id):
+        if req.method == 'GET':
+            if id != 0:
+                item = Post.objects.get(id=id)
+                dados = {}
+                dados['post'] = item
+                dados['form'] = PostForm(instance=item)
+                print(dados['post'])
+                return render(req,'home/post/editar-post.html',dados)
 
     def login(req):
         if req.method == 'GET':

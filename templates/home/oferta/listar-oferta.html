@@ -1,0 +1,86 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Listar Ofertas {% endblock %} 
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+        <!-- [ breadcrumb ] start -->
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title">
+                            <h5 class="m-b-10">Listagem Oferta</h5>
+                        </div>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/dashboard/"><i class="feather icon-home"></i></a></li>
+                            <li class="breadcrumb-item"><a href="#!">tabelas</a></li>
+                            <li class="breadcrumb-item"><a href="javascript:">listagem</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-body">
+            <div class="page-wrapper">
+                <!-- [ Main Content ] start -->
+                <div class="row">
+
+                    <div class="col-xl-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Listagem Oferta</h5>
+                            </div>
+                            <div class="card-block table-border-style">
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <form id="form" method="post"> {% csrf_token %}
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Nome</th>
+                                                    <th>CPF</th>
+                                                    <th>Telefone</th>
+                                                    <th>Valor</th>
+                                                    <th>Data/Horario</th>
+                                                    <th>Ação</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for of in oferta %}
+                                                <tr>
+                                                    <th scope="row" id="teste">{{ of.id }}</th>
+                                                    <td>{{ of.name }}</td>
+                                                    <td>{{ of.cpf }}</td>
+                                                    <td>{{ of.tel }}</td>
+                                                    <td>{{ of.get_value_formatado }}</td>
+                                                    <td>{{ of.get_data_formatado }}</td>
+                                                    <td>
+                                                        <a href="/dashboard/deletar/oferta/{{of.id}}" type="submit" class="btn btn-danger"  >Deletar</a>
+                                                        <a href="/dashboard/pages/editar-oferta/{{of.id}}" type="submit" class="btn btn-success"  >Editar</a>
+                                                    </td>
+                                                </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </form>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>    
+        </div>
+
+    </div>
+</div>
+
+
+{% endblock content %}

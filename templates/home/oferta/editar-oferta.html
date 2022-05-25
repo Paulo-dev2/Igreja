@@ -1,0 +1,117 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Editar - Oferta {% endblock %} 
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+        <!-- [ breadcrumb ] start -->
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title">
+                            <h5 class="m-b-10">Editar Oferta</h5>
+                        </div>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/dashboard"><i class="feather icon-home"></i></a></li>
+                            <li class="breadcrumb-item"><a href="javascript:">Oferta</a></li>
+                            <li class="breadcrumb-item"><a href="javascript:">Editar Oferta</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-body">
+            <div class="page-wrapper">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Formulario</h5>
+                            </div>
+                            <form id="form" method="post"> {% csrf_token %}
+                                <div class="row">
+                                    <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Nome</label>
+                                                <input type="text" id="nome" class="form-control" name="nome_agenda" value="{{oferta.name}}" placeholder="Digite o nome da agenda">
+                                                <input name="id" id="id" type="hidden" value="{{oferta.id}}">
+                                            </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>CPF do Dizimista</label>
+                                            <input name="cpf" id="cpf" type="text" placeholder="Digite o cpf" value="{{oferta.cpf}}" class="form-control">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Telefone do Dizimista</label>
+                                            <input name="tel" id="tel" type="text" placeholder="Digite o telefone" value="{{oferta.tel}}" class="form-control">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Valor do dizimo</label>
+                                            <input name="value" value="{{oferta.value}}" id="value" type="text" placeholder="Digite o valor do dizimo" class="form-control">
+                                            <br/>
+                                            <button type="submit" class="btn btn-primary">Editar!! </button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    let form = document.getElementById('form'); 
+
+    form.addEventListener('submit', function(event) { // 1
+        event.preventDefault()
+        
+        let data = new FormData(); // 2
+        
+        data.append("nome", document.getElementById('nome').value)  
+        data.append("id", document.getElementById('id').value)  
+        data.append("cpf", document.getElementById('cpf').value)
+        data.append("tel", document.getElementById('tel').value)  
+        data.append("value", document.getElementById('value').value)
+        data.append("csrfmiddlewaretoken", '{{csrf_token}}') // 3
+        
+        axios.post('/dashboard/editar-oferta/', data) 
+         .then( (res) => {
+            if(res.data.sucess) {
+                alert("Editado com sucesso");
+                window.location.href = "/dashboard/pages/listar-oferta/"
+            }else{
+                alert(res.data.err)
+            }
+         })
+         .catch(errors => console.log(errors)) 
+    
+    })
+
+</script>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+{% endblock javascripts %}

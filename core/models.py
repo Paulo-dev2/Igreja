@@ -97,23 +97,28 @@ class Oferta(models.Model):
     def get_value_oferta(self):
         return self.value
 
+    def get_data_formatado(self):
+        return self.data.strftime('%d/%m/%Y %H:%M Hrs')
+
     def get_value_formatado(self):
         valorReal = f'{self.value:_.2f}'
         valorReal = valorReal.replace('.',',').replace('_','.')
         return valorReal
 
-def validate_image(fieldfile_obj):
+""" def validate_image(fieldfile_obj):
     filesize = fieldfile_obj.file.size
     megabyte_limit = 2.0
     if filesize > megabyte_limit*1024*1024*1024*1024:
-        raise ValidationError("Max file size is %sMB" % str(megabyte_limit))
+        raise ValidationError("Max file size is %sMB" % str(megabyte_limit)) 
+    ,validators=[validate_image]    
+    """
 
 class Post(models.Model):
     id = models.AutoField(primary_key=True,unique=True)
     title = models.CharField(max_length=120)
     author = models.ForeignKey(User, on_delete=models.CASCADE,blank=True,null=True)
     text = RichTextField(blank=True,null=True)
-    image = models.ImageField(upload_to = 'posts/',validators=[validate_image], help_text="Tamanho maximo 4MB",blank=True)
+    image = models.ImageField(upload_to = 'posts/', help_text="Tamanho maximo 4MB",blank=True)
     post_date = models.DateField(auto_now_add=True,blank=True,null=True)
     def __str__(self):
         return self.title

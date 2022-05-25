@@ -35,7 +35,7 @@
                             <div class="card-header">
                                 <h5>Listagem</h5>
                             </div>
-                                
+
                             </div>
                             <form id="form" method="post"> {% csrf_token %}
                         </div>
@@ -53,8 +53,8 @@
                                         <p>Data de criação: {{p.post_date}}</p>
                                         <p>Titulo: {{p.title}}</p>
                                         <a href="/dashboard/details-post/{{p.id}}" class="label theme-bg text-white f-12">Details</a>
-                                        <a href="#!" class="label theme-bg2 text-white f-12">Deletar</a>
-                                        <a href="#!" class="label theme-bg text-white f-12">Editar</a>
+                                        <a href="/dashboard/deletar/post/{{p.id}}" class="label theme-bg2 text-white f-12">Deletar</a>
+                                        <a href="/dashboard/pages/editar-post/{{p.id}}" class="label theme-bg text-white f-12">Editar</a>
                                         </div>
                                     </div>
                                 </div>
@@ -68,5 +68,12 @@
         </div>
     </div>
 </div>
+
+{% comment %} {% for message in messages %}
+    {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+    <div class="success-message">{{ message }}</div>
+    {% endif %}
+{% endfor %} {% endcomment %}
+
 
 {% endblock %}

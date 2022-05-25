@@ -1,6 +1,6 @@
 {% extends "layouts/base.html" %}
 
-{% block title %} Add - Agenda {% endblock %} 
+{% block title %} Add - Dizimo {% endblock %} 
 
 <!-- Specific CSS goes HERE -->
 {% block stylesheets %}{% endblock stylesheets %}
@@ -15,12 +15,12 @@
                 <div class="row align-items-center">
                     <div class="col-md-12">
                         <div class="page-header-title">
-                            <h5 class="m-b-10">Adiconar Agenda</h5>
+                            <h5 class="m-b-10">Adiconar Dizimo</h5>
                         </div>
                         <ul class="breadcrumb">
                             <li class="breadcrumb-item"><a href="/dashboard"><i class="feather icon-home"></i></a></li>
-                            <li class="breadcrumb-item"><a href="javascript:">Agenda</a></li>
-                            <li class="breadcrumb-item"><a href="javascript:">Adiconar Agenda</a></li>
+                            <li class="breadcrumb-item"><a href="javascript:">Dizimo</a></li>
+                            <li class="breadcrumb-item"><a href="javascript:">Adiconar Dizimo</a></li>
                         </ul>
                     </div>
                 </div>
@@ -96,7 +96,7 @@
          .then( (res) => {
             if(res.data.sucess) {
                 alert("Criado com sucesso");
-                window.location.href = "/dashboard/"
+                window.location.href = "/dashboard/pages/listar-dizimo/"
             }else{
                 alert(res.data.err)
             }
