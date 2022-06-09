@@ -1,0 +1,83 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Listar - Slide {% endblock %} 
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title">
+                            <h5 class="m-b-10">Listar os slides</h5>
+                        </div>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/dashboard"><i class="feather icon-home"></i></a></li>
+                            <li class="breadcrumb-item"><a href="javascript:">Slide</a></li>
+                            <li class="breadcrumb-item"><a href="javascript:">Listar Slide</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-body">
+            <div class="page-wrapper">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Listagem</h5>
+                            </div>
+
+                            </div>
+                            <form id="form" method="post"> {% csrf_token %}
+                        </div>
+
+                        
+                        {% for sl in slide %}
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="col-md-3">
+                                    <div class="card" style="width: 17rem;">
+                                        <img class="card-img-top" style="height:30vh" src="{{media_url}}{{sl.image}}" alt="Imagem de capa do card">
+                                        <div class="card-body">
+                                        <p>Legenda 1: {{sl.caption1}}</p>
+                                        <p>Legenda 2: {{sl.caption2}}</p>
+                                        <p >Ativo: 
+                                            {% if sl.is_active == True %} 
+                                                <i class="fas fa-circle text-c-green f-10"></i> 
+                                            {% else %} 
+                                                <i class="fas fa-circle text-c-red f-10"></i> 
+                                            {% endif %}
+                                        </p>
+                                        <a href="/dashboard/deletar/slide/{{sl.id}}" class="label theme-bg2 text-white f-12">Deletar</a>
+                                        <a href="/dashboard/pages/editar-slide/{{sl.id}}" class="label theme-bg text-white f-12">Editar</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% comment %} {% for message in messages %}
+    {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+    <div class="success-message">{{ message }}</div>
+    {% endif %}
+{% endfor %} {% endcomment %}
+
+
+{% endblock %}

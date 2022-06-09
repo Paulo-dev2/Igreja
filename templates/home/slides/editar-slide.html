@@ -1,0 +1,93 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Add - Slide {% endblock %} 
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+        <!-- [ breadcrumb ] start -->
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title">
+                            <h5 class="m-b-10">Adiconar Slide</h5>
+                        </div>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/dashboard"><i class="feather icon-home"></i></a></li>
+                            <li class="breadcrumb-item"><a href="javascript:">Slide</a></li>
+                            <li class="breadcrumb-item"><a href="javascript:">Adiconar Slide</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-body">
+            <div class="page-wrapper">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Formulario</h5>
+                            </div>
+                            <form id="form" method="post"action="submit" enctype="multipart/form-data"> {% csrf_token %}
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input name="id" type="hidden" value="{{slide.id}}">
+                                            <label>Legenda 1</label>
+                                            <input required type="text" id="caption" class="form-control" value="{{slide.caption1}}" name="caption1" placeholder="Digite o nome da legenda">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Legenda 2</label>
+                                            <input required type="text" id="caption" class="form-control" name="caption2"  value="{{slide.caption2}}" placeholder="Digite o nome da legenda">
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Status</label>
+                                            <select id="ativo" name="status" value="{{slide.is_active}}" class="form-control">
+                                                {% if  slide.is_active %}
+                                                    <option value="True">Ativo</option>
+                                                    <option value="False">Não ativo</option>
+                                                {% else %}
+                                                    <option value="False">Não ativo</option>
+                                                    <option value="True">Ativo</option>
+                                                {% endif %}
+                                            </select>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <button type="submit" style="margin-top:4vh" class="btn btn-primary">Editar</button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+{% endblock javascripts %}

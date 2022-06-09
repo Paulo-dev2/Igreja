@@ -61,7 +61,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label>Valor da oferta</label>
-                                            <input name="value" id="value" type="text" placeholder="Digite o valor da oferta" class="form-control">
+                                            <input name="value" id="value" type="text" placeholder="Digite o valor da oferta" onKeyPress="return(MascaraMoeda(this,'.',',',event))" class="form-control">
                                             <br/>
                                             <button type="submit" class="btn btn-primary">Adicionar </button>
                                         </div>
@@ -78,6 +78,7 @@
     </div>
 </div>
 
+<script src="/static/js/funcao.js" ></script>
 <script>
     let form = document.getElementById('form'); 
 

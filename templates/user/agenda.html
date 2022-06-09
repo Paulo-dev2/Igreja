@@ -1,0 +1,67 @@
+{% extends "model-page.html" %}
+{% load static %}
+
+{% block stylesheet %} <link rel="stylesheet" href="/static/assets/css/style2.css"> {% endblock%}
+
+{% block content %}
+  <div class="ie-panel"><a href="http://windows.microsoft.com/en-US/internet-explorer/"><img src="images/ie8-panel/warning_bar_0000_us.jpg" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."></a></div>
+    <div class="preloader">
+      <div class="preloader-body">
+        <div class="cssload-container">
+          <div class="cssload-speeding-wheel"></div>
+        </div>
+        <p>Loading...</p>
+      </div>
+    </div>
+    <div class="page">
+      <!-- Breadcrumbs -->
+      <section class="breadcrumbs-custom-inset">
+        <div class="breadcrumbs-custom context-dark bg-overlay-60">
+          <div class="container">
+            <h2 class="breadcrumbs-custom-title">Agendas</h2>
+            <ul class="breadcrumbs-custom-path">
+              <li><a href="/home">Home</a></li>
+              <li class="active">Agenda</li>
+            </ul>
+          </div>
+          <div class="box-position" style="background-image: url({%static 'img/igreja.jpg'%});"></div>
+        </div>
+      </section>
+ 
+      <section class="section section-sm bg-default">
+        <div class="container">
+          <div class="row row-sm row-40 row-md-50">
+            {% for ag in agendas %}
+              {% if ag.agenda_ativa %}
+              <div class="col-sm-6 col-md-6 wow fadeInRight">
+                <!-- Product Big-->
+                <article class="product-big">
+                  <div class="unit flex-column flex-md-row align-items-md-stretch">
+                    <div class="unit-left"><a class="product-big-figure" href="#">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" aria-label="Placeholder: Agenda"  style="margin-top:5vh;margin-left:3vw" fill="currentColor" class="bi bi-calendar" viewBox="0 0 16 16">
+                        <path id="text-path"  d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
+                        <text>
+                          <textPath href="#text-path"></textPath>
+                        </text>
+
+                    </svg>
+                  </a></div>
+                    <div class="unit-body">
+                      <div class="product-big-body">
+                        <h5 class="product-big-title"><a href="#">{{ag.name}}</a></h5>
+                        <p class="product-big-text">Dia/Hora incio: {{ag.get_data_agenda}}</p>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              </div>
+              {% endif %}
+            {% endfor%}
+          </div>
+        </div>
+      </section>
+
+    </div>
+    <!-- Global Mailform Output-->
+    <div class="snackbars" id="form-output-global"></div>
+{% endblock %}

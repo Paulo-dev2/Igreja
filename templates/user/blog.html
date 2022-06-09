@@ -1,0 +1,81 @@
+{% extends "model-page.html" %}
+{% load static %}
+
+{% block stylesheet %} <link rel="stylesheet" href="/static/assets/css/style2.css"> {% endblock%}
+
+{% block content %}
+  <div class="ie-panel"><a href="http://windows.microsoft.com/en-US/internet-explorer/"><img src="images/ie8-panel/warning_bar_0000_us.jpg" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."></a></div>
+    <div class="preloader">
+      <div class="preloader-body">
+        <div class="cssload-container">
+          <div class="cssload-speeding-wheel"></div>
+        </div>
+        <p>Loading...</p>
+      </div>
+    </div>
+    <div class="page">
+      <!-- Breadcrumbs -->
+      <section class="breadcrumbs-custom-inset">
+        <div class="breadcrumbs-custom context-dark bg-overlay-60">
+          <div class="container">
+            <h2 class="breadcrumbs-custom-title">Blog</h2>
+            <ul class="breadcrumbs-custom-path">
+              <li><a href="/home">Home</a></li>
+              <li class="active">blog</li>
+            </ul>
+          </div>
+          <div class="box-position" style="background-image: url({%static 'img/igreja.jpg'%});"></div>
+        </div>
+      </section>
+ 
+      <section class="section section-sm section-last bg-default">
+        <div class="container">
+            <div class="pcoded-content">
+                <div class="pcoded-inner-content">
+            
+                    <div class="main-body">
+                        <div class="page-wrapper">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5>Postagens</h5>
+                                        </div>
+            
+                                        </div>
+                                        <form id="form" method="post"> {% csrf_token %}
+                                    </div>
+            
+                                    <div class="row mb-2">
+                                    {% for p in posts %}
+                                      <div class="col-md-6">
+                                          <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                                            <div class="col p-4 d-flex flex-column position-static">
+                                              <strong class="d-inline-block mb-2 text-success">{{p.author}}</strong>
+                                              <h3 class="mb-0">{{p.title}}</h3>
+                                              <div class="mb-1 text-muted">{{p.get_data_formatado}}</div>
+                                              <p class="mb-auto">{{p.resumo}}</p>
+                                              <a href="{{p.id}}" class="stretched-link">Continue Lendo</a>
+                                            </div>
+                                            <div class="col-auto d-none d-lg-block">
+                                              <img class="bd-placeholder-img" style="height:35.97vh;width:16vw" src="{{media_url}}{{p.image}}" alt="Imagem de capa do card">
+                                            </div>
+                                          </div>
+                                        </div>
+                                    {% endfor %}
+                                  </div> 
+                                </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+    <!-- Global Mailform Output-->
+    <div class="snackbars" id="form-output-global"></div>
+{% endblock %}

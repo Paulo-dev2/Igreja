@@ -47,21 +47,21 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label>CPF do Dizimista</label>
-                                            <input name="cpf" id="cpf" type="text" placeholder="Digite o cpf" class="form-control">
+                                            <input name="cpf" id="cpf" required type="text" placeholder="Digite o cpf" class="form-control">
                                         </div>
                                     </div>
 
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label>Telefone do Dizimista</label>
-                                            <input name="tel" id="tel" type="text" placeholder="Digite o telefone" class="form-control">
+                                            <input name="tel" id="tel" required type="text" placeholder="Digite o telefone" class="form-control">
                                         </div>
                                     </div>
 
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label>Valor do dizimo</label>
-                                            <input name="value" id="value" type="text" placeholder="Digite o valor do dizimo" class="form-control">
+                                            <input name="value" id="value" required type="text" onKeyPress="return(MascaraMoeda(this,'.',',',event))" placeholder="Digite o valor do dizimo" class="form-control">
                                             <br/>
                                             <button type="submit" class="btn btn-primary">Adicionar </button>
                                         </div>
@@ -78,8 +78,8 @@
     </div>
 </div>
 
+<script src="/static/js/funcao.js" ></script>
 <script>
-    let form = document.getElementById('form'); 
 
     form.addEventListener('submit', function(event) { // 1
         event.preventDefault()
@@ -90,6 +90,7 @@
         data.append("cpf", document.getElementById('cpf').value)
         data.append("tel", document.getElementById('tel').value)  
         data.append("value", document.getElementById('value').value)
+        console.log(document.getElementById('value').value)
         data.append("csrfmiddlewaretoken", '{{csrf_token}}') // 3
         
         axios.post('/dashboard/add-dizimo/', data) 

@@ -1,13 +1,54 @@
+{% load static %}
 <!DOCTYPE html>
-<html>
+<html class="wide wow-animation">
 
     <head>
         {% include "model-header.html" %}
+        {% block stylesheet %} {% endblock%}
     </head>
 
     <body>
+            <header class="section page-header">
+              <!-- RD Navbar-->
+              <div class="rd-navbar-wrap">
+                <nav class="rd-navbar  navbar-light bg-light" data-layout="rd-navbar-fixed" data-sm-layout="rd-navbar-fixed" data-md-layout="rd-navbar-fixed" data-md-device-layout="rd-navbar-fixed" data-lg-layout="rd-navbar-static" data-lg-device-layout="rd-navbar-fixed" data-xl-layout="rd-navbar-static" data-xl-device-layout="rd-navbar-static" data-xxl-layout="rd-navbar-static" data-xxl-device-layout="rd-navbar-static" data-lg-stick-up-offset="46px" data-xl-stick-up-offset="46px" data-xxl-stick-up-offset="106px" data-lg-stick-up="true" data-xl-stick-up="true" data-xxl-stick-up="true">
+                  <div class="rd-navbar-aside-outer">
+                    <div class="rd-navbar-aside">
+                      <!-- RD Navbar Panel-->
+                      <div class="rd-navbar-panel">
+                        <!-- RD Navbar Toggle-->
+                        <button class="rd-navbar-toggle" data-rd-navbar-toggle=".rd-navbar-nav-wrap"><span></span></button>
+                        <!-- RD Navbar Brand-->
+                      </div>
+                    </div>
+                  </div>
+                  <div class="rd-navbar-main-outer">
+                    <div class="rd-navbar-main">
+                      <div class="rd-navbar-nav-wrap">
+                        <!-- RD Navbar Nav-->
+                        <ul class="rd-navbar-nav">
+                          <li class="rd-nav-item active"><img src="{%static 'img/elim.jpeg'%}" style="height:10vh"/>
+                          </li>
+                          <li class="rd-nav-item"><a class="rd-nav-link" href="/home">Home</a>
+                          </li>
+                          <li class="rd-nav-item"><a class="rd-nav-link" href="/agendas">Agendas</a>
+                          </li>
+                          <li class="rd-nav-item"><a class="rd-nav-link" href="/eventos">Eventos</a>
+                          </li>
+                          <li class="rd-nav-item"><a class="rd-nav-link" href="/blog">Blog</a>
+                          </li>
+                          <li class="rd-nav-item"><a class="rd-nav-link" href="/sobre-nos">Sobre nós</a>
+                          </li>
+                          <li class="rd-nav-item"><a class="rd-nav-link" href="/contato">Contato</a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </nav>
+              </div>
+            </header>
         {% block content %} {% endblock %}
         {% include "model-footer.html" %}
     </body>
-
 </html>

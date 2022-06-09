@@ -62,7 +62,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label>Valor do dizimo</label>
-                                            <input name="value" value="{{oferta.value}}" id="value" type="text" placeholder="Digite o valor do dizimo" class="form-control">
+                                            <input name="value" value="{{oferta.value}}" id="value" type="text" onKeyPress="return(MascaraMoeda(this,'.',',',event))" placeholder="Digite o valor do dizimo" class="form-control">
                                             <br/>
                                             <button type="submit" class="btn btn-primary">Editar!! </button>
                                         </div>
@@ -78,7 +78,7 @@
 
     </div>
 </div>
-
+<script src="/static/js/funcao.js" ></script>
 <script>
     let form = document.getElementById('form'); 
 

@@ -1,0 +1,86 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Editar - User {% endblock %} 
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+        <!-- [ breadcrumb ] start -->
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title">
+                            <h5 class="m-b-10">Editar User</h5>
+                        </div>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/dashboard"><i class="feather icon-home"></i></a></li>
+                            <li class="breadcrumb-item"><a href="javascript:">User</a></li>
+                            <li class="breadcrumb-item"><a href="javascript:">Adiconar User</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-body">
+            <div class="page-wrapper">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Formulario</h5>
+                            </div>
+                            <form role="form" method="post" action="submit">{% csrf_token %}                    
+        
+                                <div class="row">
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <div class="input-group mb-3">
+                                                <input type="hidden" name="id" value={{user.id}} value={{user.id}}>
+                                                <input type="text" name="username" value={{user.username}} placeholder="Username" class="form-control" autofocus="" required id="id_username">
+                                            </div>
+                                            {% for message in messages %}
+                                                <span class="text-error">{{ message }}</span>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+            
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <div class="input-group mb-3">
+                                                <input type="email" name="email" value={{user.email}} placeholder="Email" class="form-control" required id="id_email">
+                                            </div>
+                                            <span class="text-error"></span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <button type="submit" name="register" class="btn btn-primary shadow-2 mb-4">Editar</button>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+{% endblock javascripts %}

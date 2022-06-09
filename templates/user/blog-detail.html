@@ -1,0 +1,40 @@
+{% extends "model-page.html" %}
+{% load static %}
+
+{% block stylesheet %} <link rel="stylesheet" href="/static/assets/css/style2.css"> {% endblock%}
+
+{% block content %}
+  <div class="ie-panel"><a href="http://windows.microsoft.com/en-US/internet-explorer/"><img src="images/ie8-panel/warning_bar_0000_us.jpg" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."></a></div>
+    <div class="preloader">
+      <div class="preloader-body">
+        <div class="cssload-container">
+          <div class="cssload-speeding-wheel"></div>
+        </div>
+        <p>Loading...</p>
+      </div>
+    </div>
+    <div class="page">
+      <!-- Breadcrumbs -->
+      <section class="breadcrumbs-custom-inset">
+        <div class="breadcrumbs-custom context-dark bg-overlay-60">
+          <div class="container">
+            <h2 class="breadcrumbs-custom-title">{{post.title}}</h2>
+            <ul class="breadcrumbs-custom-path">
+              <li><a href="/home" style=>Home</a></li>
+              <li  class="active">blog</li>
+            </ul>
+          </div>
+          <div class="box-position" style="background-image: url({{media_url}}{{post.image}});"></div>
+        </div>
+      </section>
+
+      <section class="section section-sm section-last bg-default">
+        <div class="container">
+            {{post.text | safe}}
+        </div>
+      </section>
+
+    </div>
+    <!-- Global Mailform Output-->
+    <div class="snackbars" id="form-output-global"></div>
+{% endblock %}

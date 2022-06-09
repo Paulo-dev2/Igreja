@@ -1,0 +1,93 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Add - Conta {% endblock %} 
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+        <!-- [ breadcrumb ] start -->
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title">
+                            <h5 class="m-b-10">Adiconar Conta</h5>
+                        </div>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/dashboard"><i class="feather icon-home"></i></a></li>
+                            <li class="breadcrumb-item"><a href="javascript:">Conta</a></li>
+                            <li class="breadcrumb-item"><a href="javascript:">Adiconar Conta</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-body">
+            <div class="page-wrapper">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Formulario</h5>
+                            </div>
+                            <form id="form" method="post" action="submit"> {% csrf_token %}
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Nome</label>
+                                            <input type="text" id="nome" class="form-control" name="nome" placeholder="Digite o nome da agenda">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Data e Horario de vencimento</label>
+                                            <input name="data_vencimento" id="dt_start" type="datetime-local" class="form-control">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Valor da Conta</label>
+                                            <input name="value" id="value" type="text" class="form-control" onKeyPress="return(MascaraMoeda(this,'.',',',event))">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="form-label" for="form6Example7">Descrição da conta</label>
+                                            <div class="form-outline mb-4">
+                                                <textarea class="form-control" id="form6Example7" name="descricao" rows="4">
+
+                                                </textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-primary">Adicionar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="/static/js/funcao.js" ></script>
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+{% endblock javascripts %}

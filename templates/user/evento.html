@@ -1,0 +1,61 @@
+{% extends "model-page.html" %}
+{% load static %}
+
+{% block stylesheet %} <link rel="stylesheet" href="/static/assets/css/style2.css"> {% endblock%}
+
+{% block content %}
+  <div class="ie-panel"><a href="http://windows.microsoft.com/en-US/internet-explorer/"><img src="images/ie8-panel/warning_bar_0000_us.jpg" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."></a></div>
+    <div class="preloader">
+      <div class="preloader-body">
+        <div class="cssload-container">
+          <div class="cssload-speeding-wheel"></div>
+        </div>
+        <p>Loading...</p>
+      </div>
+    </div>
+    <div class="page">
+      <!-- Breadcrumbs -->
+      <section class="breadcrumbs-custom-inset">
+        <div class="breadcrumbs-custom context-dark bg-overlay-60">
+          <div class="container">
+            <h2 class="breadcrumbs-custom-title">Eventos</h2>
+            <ul class="breadcrumbs-custom-path">
+              <li><a href="/home">Home</a></li>
+              <li class="active">Evento</li>
+            </ul>
+          </div>
+          <div class="box-position" style="background-image: url({%static 'img/igreja.jpg'%});"></div>
+        </div>
+      </section>
+
+      <section class="section section-sm bg-default">
+        <div class="container">
+          <div class="row row-sm row-40 row-md-50">
+            {% for event in eventos %}
+              {% if event.evento_ativo_mes %}
+              <div class="col-sm-6 col-md-12 wow fadeInRight">
+                <!-- Product Big-->
+                <article class="product-big">
+                  <div class="unit flex-column flex-md-row align-items-md-stretch">
+                    <div class="unit-left"><a class="product-big-figure" href="#"><img src="{{media_url}}{{event.image}}" alt="" width="600" height="366"/></a></div>
+                    <div class="unit-body">
+                      <div class="product-big-body">
+                        <h5 class="product-big-title"><a href="#">{{event.name}}</a></h5>
+                        <p class="product-big-text">Departamento: {{event.vinculo}}</p>
+                        <p class="product-big-text">Dia/Hora incio: {{event.get_data_start_evento}}</p>
+                        <p class="product-big-text">Dia/Hora FInal: {{event.get_data_end_evento}}</p>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              </div>
+              {% endif %}
+            {% endfor%}
+          </div>
+        </div>
+      </section>
+
+    </div>
+    <!-- Global Mailform Output-->
+    <div class="snackbars" id="form-output-global"></div>
+{% endblock %}

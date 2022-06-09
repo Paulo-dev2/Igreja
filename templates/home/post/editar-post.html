@@ -38,24 +38,21 @@
                             <form id="form" method="post" action="submit" enctype="multipart/form-data">  {% csrf_token %}
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <div class="form-group" style="margin-left:3vw">
+                                        <div class="form-group" style="margin-left:4vw">
                                             <label>Title</label>
                                             <input name="id" type="hidden" value="{{post.id}}">
                                             <input type="text" id="nome" class="form-control" name="title" placeholder="Digite o titulo do post" value="{{post.title}}">
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="fileinput" style="cursor:pointer;" >
-                                                Imagem: 
-                                                <img width="50" src="/static/img/adicionar-imagem.png" >
-                                            </label>
-                                            <input type="file" onChange="mostrar_nome_imagem(this.value)" value="{{post.image}}" style="display:none" id="fileinput" class="form-control" name="image">
-                                            <div id="name_img">
-                                            
-                                            </div>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <div class="form-group" style="margin-left:3vw;margin-right:3vw">
+                                            <label>Resumo</label>
+                                            <textarea required name="resumo" placeholder="Digite o resumo da publicação..." id="form17" class="md-textarea form-control" rows="3" style="resize: none">{{post.resumo}}</textarea>
                                         </div>
                                     </div>
+
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             {{form.media}}
@@ -79,16 +76,6 @@
 
     </div>
 </div>
-
-<script>
-    let form = document.getElementById('form'); 
-
-    function mostrar_nome_imagem(nome){
-        var div = document.getElementById('name_img')
-        div.innerText =  nome.split('\\').pop()
-    }
-
-</script>
 
 {% endblock content %}
 

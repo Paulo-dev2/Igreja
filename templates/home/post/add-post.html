@@ -40,7 +40,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group" style="margin-left:3vw">
                                             <label>Title</label>
-                                            <input type="text" id="nome" class="form-control" name="title" placeholder="Digite o titulo do post">
+                                            <input required type="text" id="nome" class="form-control" name="title" placeholder="Digite o titulo do post">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -49,12 +49,20 @@
                                                 Imagem: 
                                                 <img width="50" src="/static/img/adicionar-imagem.png" >
                                             </label>
-                                            <input type="file" onChange="mostrar_nome_imagem(this.value)" style="display:none" id="fileinput" class="form-control" name="image">
+                                            <input required type="file" onChange="mostrar_nome_imagem(this.value)" style="display:none" id="fileinput" class="form-control" name="image">
                                             <div id="name_img">
                                             
                                             </div>
                                         </div>
                                     </div>
+
+                                    <div class="col-md-12">
+                                        <div class="form-group" style="margin-left:3vw;margin-right:3vw">
+                                            <label>Resumo</label>
+                                            <textarea required name="resumo" placeholder="Digite o resumo da publicação..." id="form17" class="md-textarea form-control" rows="3" style="resize: none"></textarea>
+                                        </div>
+                                    </div>
+
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             {{form.media}}

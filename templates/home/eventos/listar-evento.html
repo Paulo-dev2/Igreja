@@ -1,0 +1,137 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Listar Evento {% endblock %} 
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+        <!-- [ breadcrumb ] start -->
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title">
+                            <h5 class="m-b-10">Listagem Eventos</h5>
+                        </div>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/dashboard/"><i class="feather icon-home"></i></a></li>
+                            <li class="breadcrumb-item"><a href="#!">tabelas</a></li>
+                            <li class="breadcrumb-item"><a href="javascript:">listagem</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-body">
+            <div class="page-wrapper">
+                <!-- [ Main Content ] start -->
+                <div class="row">
+
+                    <div class="col-xl-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Listagem Eventos</h5>
+                            </div>
+                            <div class="card-block table-border-style">
+                                <div class="table-responsive">
+                                    <table class="table table-hover" id="TableDT">
+                                        <form id="form" method="post"> {% csrf_token %}
+                                            <thead>
+                                                <tr>
+                                                    <th>Image</th>
+                                                    <th>Nome</th>
+                                                    <th>Vinculo</th>
+                                                    <th>Valor</th>
+                                                    <th>Dia e Hora que começa</th>
+                                                    <th>Dia e Hora que Termina</th>
+                                                    <th class="text-right">Ação</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tbody>
+                                                    {% for event in evento %}
+                                                    <tr>
+                                                        <td>
+                                                            <img class="rounded-circle m-r-10" style="width:40px;" src="{{media_url}}{{event.image}}" alt="activity-user" />
+                                                        </td>
+                                                        <td>
+                                                            <h6 class="m-0">{{ event.name }}</h6>
+                                                        </td>
+                                                        <td>
+                                                            <h6 class="m-0">{{ event.vinculo }}</h6>
+                                                        </td>
+                                                        <td>
+                                                            <h6 class="m-0">{{ event.get_value_formatado }}</h6>
+                                                        </td>
+                                                        <td>
+                                                            <h6 class="m-0 text-c-black">{{ event.get_data_start_evento }}</h6>
+                                                        </td>
+                                                        <td>
+                                                            <h6 class="m-0 text-c-black">{{ event.get_data_end_evento }}</h6>
+                                                        </td>
+                                                        <td class="text-right">
+                                                            <a href="/dashboard/deletar/evento/{{event.id}}" class="label theme-bg2 text-white f-12">Deletar</a>
+                                                            <a href="/dashboard/pages/editar-evento/{{event.id}}" class="label theme-bg text-white f-12">Editar</a>
+                                                        </td>
+                                                    </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                            </tbody>
+                                        </form>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>    
+        </div>
+
+    </div>
+</div>
+{% endblock content %}
+
+{% block javascripts %}
+<script>
+    $(document).ready( function () {
+        $('#TableDT').DataTable({
+            responsive: true,
+            // "bSort": false,
+            "aaSorting": [],
+            "pageLength": 10,
+            "language": {
+                "decimal": "",
+                "emptyTable": "Sem dados disponíveis",
+                "info": "Mostrando de _START_ até _END_ de _TOTAL_ registos",
+                "infoEmpty": "Mostrando de 0 até 0 de 0 registos",
+                "infoFiltered": "(filtrado de _MAX_ registos no total)",
+                "infoPostFix": "",
+                "thousands": ",",
+                "lengthMenu": "Mostrar _MENU_ registos",
+                "loadingRecords": "A carregar dados...",
+                "processing": "A processar...",
+                "search": "Procurar:",
+                "zeroRecords": "Não foram encontrados resultados",
+                "paginate": {
+                    "first": "Primeiro",
+                    "last": "Último",
+                    "next": "Seguinte",
+                    "previous": "Anterior"
+                },
+                "aria": {
+                    "sortAscending": ": ordem crescente",
+                    "sortDescending": ": ordem decrescente"
+                }
+            }
+        });
+    });
+</script>
+{% endblock javascripts %}

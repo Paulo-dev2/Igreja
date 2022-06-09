@@ -1,0 +1,252 @@
+{% extends "model-page.html" %}
+{% load static %}
+
+{% block stylesheet %} <link rel="stylesheet" href="/static/assets/css/style2.css"> {% endblock%}
+
+{% block content %}
+
+<div class="ie-panel"><a href="http://windows.microsoft.com/en-US/internet-explorer/"><img src="{%static 'assets/images/ie8-panel/warning_bar_0000_us.jpg'%}" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."></a></div>
+    <div class="preloader">
+      <div class="preloader-body">
+        <div class="cssload-container">
+          <div class="cssload-speeding-wheel"></div>
+        </div>
+        <p>Loading...</p>
+      </div>
+    </div>
+    <div class="page">
+      
+      <!-- Swiper-->
+      <section class="section swiper-container swiper-slider swiper-slider-corporate swiper-pagination-style-2" data-loop="true" data-autoplay="5000" data-simulate-touch="true" data-nav="false" data-direction="vertical">
+        <div class="swiper-wrapper text-left">
+          {% for slide in slides %}
+            {% if slide.is_active %}
+              <div class="swiper-slide context-dark" data-slide-bg="{{ media_url}}{{slide.image}}">
+                <div class="swiper-slide-caption section-md">
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-md-10">
+                        <h6 class="text-uppercase" data-caption-animate="fadeInRight" data-caption-delay="0">{{slide.caption1}}</h6>
+                        <h2 class="oh font-weight-light" data-caption-animate="slideInUp" data-caption-delay="100"><span></span><span class="font-weight-bold">{{slide.caption2}}</span></h2>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {%endif%}
+          {%endfor%}
+        <!-- Swiper Pagination-->
+        <div class="swiper-pagination"></div>
+      </section>
+      <!-- Discover New Horizons-->
+      <section class="section section-sm section-first bg-default text-md-left">
+        <div class="container">
+          <div class="row row-50 align-items-center justify-content-center justify-content-xl-between">
+            <div class="col-lg-6 text-center wow fadeInUp"><img src="{%static 'img/acoes.jpg'%}" alt="" width="556" height="382"/>
+            </div>
+            <div class="col-lg-6 wow fadeInRight" data-wow-delay=".1s">
+              <div class="box-width-lg-470">
+                <h3>Ações Semanais</h3>
+                <!-- Bootstrap tabs-->
+                <div class="tabs-custom tabs-horizontal tabs-line tabs-line-big tabs-line-style-2 text-center text-md-left" id="tabs-7">
+                  <!-- Nav tabs-->
+                  <ul class="nav nav-tabs">
+                    <li class="nav-item" role="presentation"><a class="nav-link active" href="#tabs-7-1" data-toggle="tab">Cultos</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="#tabs-7-2" data-toggle="tab">Programções</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="#tabs-7-3" data-toggle="tab">Live</a></li>
+                  </ul>
+                  <!-- Tab panes-->
+                  <div class="tab-content">
+                    <div class="tab-pane fade show active" id="tabs-7-1">
+                      <p>Domingo | Culto 18:30</p>
+                    </div>
+                    <div class="tab-pane fade" id="tabs-7-2">
+                      <p>Terça e Sexta | IGL 20h (Reuniões nos lares)</p>
+                      <p>3º Sábado do Mês | Preparai o caminho ás 21h</p>
+                    </div>
+                    <div class="tab-pane fade" id="tabs-7-3">
+                      <p>Quinta | RELIGARE 20h30 (Live Youtube)</p>
+                      {% comment %} <div class="group-md group-middle"><a class="button button-secondary button-pipaluk" href="contact-us.html">Get in Touch</a><a class="button button-black-outline button-md" href="about.html">Read More</a></div> {% endcomment %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!--	Our Services-->
+      <section class="section section-sm">
+        <div class="container">
+          <h3>Agendas</h3>
+          <div class="row row-30">
+            {% for agenda in agendas %}
+              {% if agenda.agenda_ativa %}
+                <div class="col-sm-6 col-lg-4">
+                  <article class="box-icon-classic">
+                    <div class="unit box-icon-classic-body flex-column flex-md-row text-md-left flex-lg-column text-lg-center flex-xl-row text-xl-left">
+                      <div class="unit-left">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar" viewBox="0 0 16 16">
+                          <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
+                        </svg>
+                      </div>
+                      <div class="unit-body">
+                        <h5 class="box-icon-classic-title"><a href="#">{{agenda.name}}</a></h5>
+                        <p class="box-icon-classic-text">{{agenda.data_start}}</p>
+                      </div>
+                    </div>
+                  </article>
+                </div>
+              {% endif %}
+            {% endfor %}
+        </div>
+      </section>
+      <!-- Hot tours-->
+      <section class="section section-sm bg-default">
+        <div class="container">
+          <h3 class="oh-desktop"><span class="d-inline-block wow slideInDown">Iniciando a Jornada</span></h3>
+          <div class="row row-sm row-40 row-md-50">
+            <div class="col-sm-6 col-md-12 wow fadeInRight">
+              <!-- Product Big-->
+              <article class="product-big">
+                <div class="unit flex-column flex-md-row align-items-md-stretch">
+                  <div class="unit-left"><a class="product-big-figure" href="#"><img src="{%static 'img/bussula.jpg'%}" alt="" width="600" height="366"/></a></div>
+                  <div class="unit-body">
+                    <div class="product-big-body">
+                      <h5 class="product-big-title"><a href="#">Seja Bem Vindo!</a></h5>
+                      <p class="product-big-text">Estamos muito alegres com sua chegada e qeremos que sua integração e adaptações seja uma experiência incrivel. Esse newsletter irá te ajudar a entender nossa plataforma e mostrar o passo a passo para sua jornada como discipilo de Cristo em nossa comunidade.</p>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-sm bg-default">
+        <div class="container">
+          <h3 class="oh-desktop"><span class="d-inline-block wow slideInDown">Eventos</span></h3>
+          <div class="row row-sm row-40 row-md-50">
+            {% for event in eventos %}
+              {% if event.evento_ativo_mes %}
+              <div class="col-sm-6 col-md-12 wow fadeInRight">
+                <!-- Product Big-->
+                <article class="product-big">
+                  <div class="unit flex-column flex-md-row align-items-md-stretch">
+                    <div class="unit-left"><a class="product-big-figure" href="#"><img src="{{media_url}}{{event.image}}" alt="" width="600" height="366"/></a></div>
+                    <div class="unit-body">
+                      <div class="product-big-body">
+                        <h5 class="product-big-title"><a href="#">{{event.name}}</a></h5>
+                        <p class="product-big-text">Departamento: {{event.vinculo}}</p>
+                        <p class="product-big-text">Dia/Hora incio: {{event.get_data_start_evento}}</p>
+                        <p class="product-big-text">Dia/Hora FInal: {{event.get_data_end_evento}}</p>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              </div>
+              {% endif %}
+            {% endfor%}
+          </div>
+        </div>
+      </section>
+
+      <!-- Different People-->
+      <section class="section section-sm">
+        <div class="container">
+          <h3 class="title-block find-car oh"><span class="d-inline-block wow slideInUp">Pastores</span></h3>
+          <div class="row row-30 justify-content-center box-ordered">
+            <div class="col-sm-6 col-md-5 col-lg-3">
+              <!-- Team Modern-->
+              <article class="team-modern">
+                <div class="team-modern-header"><a class="team-modern-figure" href="#"><img class="img-circles" src="{%static 'img/igor.jpg'%}" alt="" width="118" height="118"/></a>
+                  <svg x="0px" y="0px" width="270px" height="70px" viewbox="0 0 270 70" enable-background="new 0 0 270 70" xml:space="preserve">
+                    <g>
+                      <path fill="#161616" d="M202.085,0C193.477,28.912,166.708,50,135,50S76.523,28.912,67.915,0H0v70h270V0H202.085z"></path>
+                    </g>
+                  </svg>
+                </div>
+                <div class="team-modern-caption">
+                  <h6 class="team-modern-name"><a href="#">Pastor & Presidente</a></h6>
+                  <p class="team-modern-status">Igor Marçal</p>
+                  <h6 class="team-modern-phone"><a href="tel:#"> 61 8476-4514</a></h6>
+                </div>
+              </article>
+            </div>
+      </section>
+      <!-- Section Subscribe-->
+      <section class="section bg-default text-center offset-top-50">
+        <div class="parallax-container" data-parallax-img="{%static 'img/background.jpg'%}">
+          <div class="parallax-content section-xl section-inset-custom-1 context-dark bg-overlay-2-21">
+            <div class="container">
+              <h2 class="heading-2 oh font-weight-normal wow slideInDown"><span class="d-block font-weight-semi-bold">Nossa Plataforma</span><span class="d-block font-weight-light">Por IGOR MARÇAL!</span></h2>
+              <p class="text-width-medium text-spacing-75 wow fadeInLeft" data-wow-delay=".1s">Quando penso sobre uma igreja bíblica e orgânica, como gosto de chamar, dois exemplos são determinantes para mim a igreja de Atos 2, com uma pregação direta e cristocêntrica, discipulado, temor, sinais e exemplo na sociedade. E a igreja de Efésios 4 fundamentanda pelas ministeriais aperfeiçoando e edificando uns aos outros em amor, buscando o amadurecimento e constância, onde cada um oferece sua contribuição de forma voluntária e assim segundo o cabeça que é Cristo experimentar um crescimento saudável e sustentável. </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!--	Instagrram wondertour-->
+      <section class="section section-sm section-top-0 section-fluid section-relative bg-gray-4">
+        <div class="container-fluid">
+          <h6 class="gallery-title">Gallery</h6>
+          <!-- Owl Carousel-->
+          <div class="owl-carousel owl-classic owl-dots-secondary" data-items="1" data-sm-items="2" data-md-items="3" data-lg-items="4" data-xl-items="5" data-xxl-items="6" data-stage-padding="15" data-xxl-stage-padding="0" data-margin="30" data-autoplay="true" data-nav="true" data-dots="true">
+            <!-- Thumbnail Classic-->
+            <article class="thumbnail thumbnail-mary">
+              <div class="thumbnail-mary-figure"><img src="{%static 'assets/images/gallery-image-1-270x195.jpg'%}" alt="" width="270" height="195"/>
+              </div>
+              <div class="thumbnail-mary-caption"><a class="icon fl-bigmug-line-zoom60" href="{%static 'assets/images/gallery-image-1-1200x800-original.jpg'%}" data-lightgallery="item"><img src="{%static 'assets/images/gallery-image-1-270x195.jpg'%}" alt="" width="270" height="195"/></a>
+              </div>
+            </article>
+            <!-- Thumbnail Classic-->
+            <article class="thumbnail thumbnail-mary">
+              <div class="thumbnail-mary-figure"><img src="{%static 'assets/images/gallery-image-2-270x195.jpg'%}" alt="" width="270" height="195"/>
+              </div>
+              <div class="thumbnail-mary-caption"><a class="icon fl-bigmug-line-zoom60" href="assets/images/gallery-image-2-1200x800-original.jpg" data-lightgallery="item"><img src="{%static 'assets/images/gallery-image-2-270x195.jpg'%}" alt="" width="270" height="195"/></a>
+              </div>
+            </article>
+            <!-- Thumbnail Classic-->
+            <article class="thumbnail thumbnail-mary">
+              <div class="thumbnail-mary-figure"><img src="{%static 'assets/images/gallery-image-3-270x195.jpg'%}" alt="" width="270" height="195"/>
+              </div>
+              <div class="thumbnail-mary-caption"><a class="icon fl-bigmug-line-zoom60" href="{%static 'assets/images/gallery-image-3-1200x800-original.jpg'%}" data-lightgallery="item"><img src="assets/images/gallery-image-3-270x195.jpg" alt="" width="270" height="195"/></a>
+              </div>
+            </article>
+            <!-- Thumbnail Classic-->
+            <article class="thumbnail thumbnail-mary">
+              <div class="thumbnail-mary-figure"><img src="{%static 'assets/images/gallery-image-4-270x195.jpg'%}" alt="" width="270" height="195"/>
+              </div>
+              <div class="thumbnail-mary-caption"><a class="icon fl-bigmug-line-zoom60" href="{%static 'assets/images/gallery-image-4-1200x800-original.jpg'%}" data-lightgallery="item"><img src="{%static 'assets/images/gallery-image-4-270x195.jpg'%}" alt="" width="270" height="195"/></a>
+              </div>
+            </article>
+            <!-- Thumbnail Classic-->
+            <article class="thumbnail thumbnail-mary">
+              <div class="thumbnail-mary-figure"><img src="{%static 'assets/images/gallery-image-5-270x195.jpg'%}" alt="" width="270" height="195"/>
+              </div>
+              <div class="thumbnail-mary-caption"><a class="icon fl-bigmug-line-zoom60" href="{%static 'assets/images/gallery-image-5-1200x800-original.jpg'%}" data-lightgallery="item"><img src="{%static 'assets/images/gallery-image-5-270x195.jpg'%}" alt="" width="270" height="195"/></a>
+              </div>
+            </article>
+            <!-- Thumbnail Classic-->
+            <article class="thumbnail thumbnail-mary">
+              <div class="thumbnail-mary-figure"><img src="{%static 'assets/images/gallery-image-6-270x195.jpg'%}" alt="" width="270" height="195"/>
+              </div>
+              <div class="thumbnail-mary-caption"><a class="icon fl-bigmug-line-zoom60" href="{%static 'assets/images/gallery-image-6-1200x800-original.jpg'%}" data-lightgallery="item"><img src="{%static 'assets/images/gallery-image-6-270x195.jpg'%}" alt="" width="270" height="195"/></a>
+              </div>
+            </article>
+            <!-- Thumbnail Classic-->
+            <article class="thumbnail thumbnail-mary">
+              <div class="thumbnail-mary-figure"><img src="{%static 'assets/images/gallery-image-7-270x195.jpg'%}" alt="" width="270" height="195"/>
+              </div>
+              <div class="thumbnail-mary-caption"><a class="icon fl-bigmug-line-zoom60" href="{%static 'assets/images/gallery-image-7-1200x800-original.jpg'%}" data-lightgallery="item"><img src="{%static 'assets/images/gallery-image-7-270x195.jpg'%}" alt="" width="270" height="195"/></a>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+      
+    </div>
+    <!-- Global Mailform Output-->
+    <div class="snackbars" id="form-output-global"></div>
+    <!-- Javascript-->
+{% endblock %}

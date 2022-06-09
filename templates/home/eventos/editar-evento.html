@@ -1,0 +1,107 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Editar - Evento {% endblock %} 
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+        <!-- [ breadcrumb ] start -->
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title">
+                            <h5 class="m-b-10">Editar Eventos</h5>
+                        </div>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/dashboard"><i class="feather icon-home"></i></a></li>
+                            <li class="breadcrumb-item"><a href="javascript:">Evento</a></li>
+                            <li class="breadcrumb-item"><a href="javascript:">Editar Evento</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-body">
+            <div class="page-wrapper">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Formulario</h5>
+                            </div>
+                            <form id="form" method="post" action="submit" enctype="multipart/form-data"> {% csrf_token %}
+                                <div class="row">
+                                    <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Nome</label>
+                                                <input id="value" value="{{evento.id}}" id="preco" type="hidden" name="id">
+                                                <input required type="text" id="nome" value="{{evento.name}}" class="form-control" name="nome" placeholder="Digite o nome do evento">
+                                            </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Quantidade de ingressos</label>
+                                            <input required name="qtd_ingresso" id="qtd" value="{{evento.quantidade_ingressos}}" type="number" class="form-control" placeholder="Digite a quantidade de ingressos!!">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Preço</label>
+                                            <input required id="value" name="preco" type="text" value="{{evento.preco}}" onKeyPress="return(MascaraMoeda(this,'.',',',event))" id="preco" type="text" class="form-control" placeholder="Digite o preço do envento!!">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-5">
+                                        <div class="form-group">
+                                            <label>Vinculo</label>
+                                            <input required name="vinculo" id="vinculo" value="{{evento.vinculo}}" type="text" class="form-control" placeholder="Digite qual é o vinculo do evento!!">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Data e Horario do inicio do evento</label>
+                                            <input required name="data_evento_start" value="{{evento.get_data_formatado_inicio}}" id="dt_start" type="datetime-local" class="form-control">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Data e Horario do fim do evento</label>
+                                            <input required name="data_evento_end" id="dt_end" value="{{evento.get_data_formatado_fim}}" type="datetime-local" class="form-control">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <button type="submit" style="margin-top:4vh" class="btn btn-primary">Editar</button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script src="/static/js/funcao.js" ></script>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+{% endblock javascripts %}

@@ -1,0 +1,137 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Add - Slide {% endblock %} 
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+        <!-- [ breadcrumb ] start -->
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title">
+                            <h5 class="m-b-10">Adiconar Slide</h5>
+                        </div>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/dashboard"><i class="feather icon-home"></i></a></li>
+                            <li class="breadcrumb-item"><a href="javascript:">Slide</a></li>
+                            <li class="breadcrumb-item"><a href="javascript:">Adiconar Slide</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-body">
+            <div class="page-wrapper">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Formulario</h5>
+                            </div>
+                            <form id="form" method="post"action="submit" enctype="multipart/form-data"> {% csrf_token %}
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Legenda 1</label>
+                                            <input required type="text" id="caption" class="form-control" name="caption1" placeholder="Digite o nome da legenda">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="fileinput" style="cursor:pointer;" >
+                                                Imagem: 
+                                                <img width="50" src="/static/img/adicionar-imagem.png" >
+                                            </label>
+                                            <input required type="file" onChange="mostrar_nome_imagem(this.value)" style="display:none" id="fileinput" class="form-control" name="image">
+                                            <div id="name_img">
+                                            
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Legenda 2</label>
+                                            <input required type="text" id="caption" class="form-control" name="caption2" placeholder="Digite o nome da legenda">
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Status</label>
+                                            <select id="ativo" name="status" class="form-control">
+                                                <option value="True">Ativo</option>
+                                                <option value="False">Não ativo</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <button type="submit" style="margin-top:4vh" class="btn btn-primary">Adicionar</button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    let form = document.getElementById('form'); 
+    
+    function mostrar_nome_imagem(nome){
+        var div = document.getElementById('name_img')
+        div.innerText =  nome.split('\\').pop()
+    }
+
+    {% comment %} form.addEventListener('submit', function(event) { // 1
+        event.preventDefault()
+        
+        let data = new FormData(); // 2
+        
+        data.append("nome", document.getElementById('nome').value)  
+        data.append("data_evento_start", document.getElementById('dt_start').value)
+        data.append("data_evento_end", document.getElementById('dt_end').value)
+        data.append("image", document.getElementById('fileinput').value)
+        data.append("vinculo", document.getElementById('vinculo').value)
+        data.append("qtd", document.getElementById('qtd').value)
+        data.append("preco", document.getElementById('preco').value)
+        data.append("csrfmiddlewaretoken", '{{csrf_token}}') // 3
+        
+        axios.post('/dashboard/add-evento/', data) 
+         .then( (res) => {
+            if(res.data.sucess) {
+                alert("Criado com sucesso");
+                window.location.href = "/dashboard/pages/listar-agenda"
+            }else{
+                alert(res.data.err)
+            }
+         })
+         .catch(errors => console.log(errors)) 
+    
+    }) {% endcomment %}
+
+</script>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+{% endblock javascripts %}
