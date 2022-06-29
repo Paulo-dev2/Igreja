@@ -1,0 +1,80 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Details - Feedback {% endblock %} 
+
+<!-- Specific CSS goes HERE -->
+
+{% block content %}
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+        <!-- [ breadcrumb ] start -->
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title">
+                            <h5 class="m-b-10">Detail Feedback</h5>
+                        </div>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/dashboard"><i class="feather icon-home"></i></a></li>
+                            <li class="breadcrumb-item"><a href="javascript:">Feedback</a></li>
+                            <li class="breadcrumb-item"><a href="javascript:">Detail Feedback</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-body">
+            <div class="page-wrapper">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Formulario</h5>
+                            </div>
+                            <form id="form" method="post"> {% csrf_token %}
+                                <div class="row">
+                                    <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Nome</label>
+                                                <input type="text" id="nome" disabled class="form-control" name="nome_feedback" value="{{feedback.name_from}}" placeholder="nome">
+                                            </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Email</label>
+                                            <input name="email" id="email" disabled type="text" placeholder="email" value="{{feedback.email_from}}" class="form-control">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Telefone</label>
+                                            <input name="tel" id="tel" disabled type="text" placeholder="telefone" value="{{feedback.telefone}}" class="form-control">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                            <label for="exampleFormControlTextarea5">Texto</label>
+                                            <textarea class="form-control" disabled id="exampleFormControlTextarea5" rows="3" style="width:75vw">
+                                                {{feedback.text_from}}
+                                            </textarea>
+                                    </div>
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block javascripts %}{% endblock javascripts %}

@@ -1,0 +1,91 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Perfil {% endblock %} 
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+    <!-- [ Main Content ] start -->
+            <div class="pcoded-content">
+                <div class="pcoded-inner-content">
+                    <div class="main-body">
+                        <div class="page-wrapper">
+                            <!-- [ Main Content ] start -->
+                            <form action="/dashboard/pages/profile/submit" method="post"> {% csrf_token %}
+                                <div class="row">
+                                    <div class="col-sm-8">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h5>Editar Information</h5>
+                                            </div>
+                                            <div class="card-block">
+                                                <div class="row">
+                                                    <div class="col-sm-12 mb-4">
+                                                        <div class="form-group">
+                                                            <label for="exampleInputEmail1">Endereço de email</label>
+                                                            <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" value={{profile.email}}>
+                                                            <input type="hidden" name="id" value={{profile.id}}>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6 mb-4">
+                                                        <div class="form-group">
+                                                            <label for="fn">Primeiro Nome</label>
+                                                            <input type="text" name="first_name" class="form-control" id="fn" {% if profile.first_name == "" %} value="" required {% else %} value={{profile.first_name}} {% endif %}aria-describedby="Vazio" placeholder="Primeiro Nome">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6 mb-4">
+                                                        <div class="form-group">
+                                                            <label for="ln">Segundo Nome</label>
+                                                            <input type="text" name="last_name" class="form-control" id="ln" {% if profile.last_name == "" %} value="" required {% else %} value={{profile.last_name}} {% endif %} aria-describedby="Vazio" placeholder="Segundo Nome">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-12 mb-4">
+                                                        <div class="form-group">
+                                                            <label for="add">Username</label>
+                                                            <input type="text" name="username" class="form-control" id="add" aria-describedby="emailHelp" placeholder="usernam" value={{profile.username}}>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-12 mb-4">
+                                                        <div class="form-group">
+                                                            <button type="submit" class="btn btn-primary">Editar</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="card">
+                                            <div class="card-block">
+                                                <div class="d-flex align-items-center justify-content-center flex-column">
+                                                    <div class="w-50 p-3">
+                                                        <img src="https://appsrv1-147a1.kxcdn.com/data-able-v100-enh1/images/user/avatar-2.jpg" alt="profile image"
+                                                            class="img-fluid rounded-circle">
+                                                    </div>
+                                                    <div class="text-center">
+                                                        <h4 class="font-weight-bold h6">{{profile.username}}</h4>
+                                                        <p class="font-italic text-muted">{% if admin == True %}Administrador {% else %} Usuario Normal{% endif %}</p>
+                                                    </div>
+                                                </div>
+
+                                                <div class="small font-weight-light mt-4 text-center text-muted">
+                                                    <p>Este sistema pertence unicamente ao Ministério Elim...</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            <!-- [ Main Content ] end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+    <!-- [ Main Content ] end -->
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

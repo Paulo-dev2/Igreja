@@ -4,7 +4,7 @@
 {% block stylesheet %} <link rel="stylesheet" href="/static/assets/css/style2.css"> {% endblock%}
 
 {% block content %}
-  <div class="ie-panel"><a href="http://windows.microsoft.com/en-US/internet-explorer/"><img src="images/ie8-panel/warning_bar_0000_us.jpg" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."></a></div>
+  <div class="ie-panel"><a href="http://windows.microsoft.com/en-US/internet-explorer/"><img src="{%static 'images/ie8-panel/warning_bar_0000_us.jpg' %}" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."></a></div>
     <div class="preloader">
       <div class="preloader-body">
         <div class="cssload-container">
@@ -31,6 +31,7 @@
       <section class="section section-sm bg-default">
         <div class="container">
           <div class="row row-sm row-40 row-md-50">
+            {%if eventos.count > 0%}
             {% for event in eventos %}
               {% if event.evento_ativo_mes %}
               <div class="col-sm-6 col-md-12 wow fadeInRight">
@@ -51,6 +52,24 @@
               </div>
               {% endif %}
             {% endfor%}
+            {%else%}
+            <div class="col-sm-6 col-md-12 wow fadeInRight">
+              <!-- Product Big-->
+              <article class="product-big">
+                <div class="unit flex-column flex-md-row align-items-md-stretch">
+                  <div class="unit-left"><a class="product-big-figure" href="#"><img src="{%static '/img/eventos_vazios.jpg'%}" alt="" width="600" height="366"/></a></div>
+                  <div class="unit-body">
+                    <div class="product-big-body">
+                      <h5 class="product-big-title"><a href="#">Sem eventos!!</a></h5>
+                      <p class="product-big-text">Departamento: Nenhum</p>
+                      <p class="product-big-text">Dia/Hora incio: 00/00/0000</p>
+                      <p class="product-big-text">Dia/Hora FInal: 00/00/0000</p>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            </div>
+            {%endif%}
           </div>
         </div>
       </section>

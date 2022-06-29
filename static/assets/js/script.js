@@ -532,7 +532,7 @@
 		function initBootstrapTooltip(tooltipPlacement) {
 			plugins.bootstrapTooltip.tooltip('dispose');
 
-			if (window.innerWidth < 576) {
+			if (window.innerWidth < 400) {
 				plugins.bootstrapTooltip.tooltip({placement: 'bottom'});
 			} else {
 				plugins.bootstrapTooltip.tooltip({placement: tooltipPlacement});

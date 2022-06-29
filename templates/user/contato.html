@@ -4,7 +4,7 @@
 {% block stylesheet %} <link rel="stylesheet" href="/static/assets/css/style2.css"> {% endblock%}
 
 {% block content %}
-    <div class="ie-panel"><a href="http://windows.microsoft.com/en-US/internet-explorer/"><img src="images/ie8-panel/warning_bar_0000_us.jpg" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."></a></div>
+    <div class="ie-panel"><a href="http://windows.microsoft.com/en-US/internet-explorer/"><img src="{%static 'images/ie8-panel/warning_bar_0000_us.jpg' %}" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."></a></div>
     <div class="preloader">
       <div class="preloader-body">
         <div class="cssload-container">
@@ -69,21 +69,7 @@
               <p>Se você tiver alguma dúvida, basta preencher o formulário de contato, e nós responderemos em breve.</p>
             </div>
           </article>
-          {% if messages %}
-            {% for msg in messages %}
-                {% if msg.level == DEFAULT_MESSAGE_LEVELS.SUCESS %}
-                  <div class="alert alert-sucess" role="alert">
-                    {{msg}}
-                  </div>
-                {% endif %}
-                {% if msg.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
-                  <div class="alert alert-danger" role="alert">
-                    {{msg}}
-                  </div>
-                {% endif %}
-            {% endfor %}
-          {% endif %}
-          <form class="rd-form rd-form-variant-2 rd-mailform" data-form-output="form-output-global" data-form-type="contact" method="post" action="submit/"> {% csrf_token %}
+          <form class="rd-form rd-form-variant-2 rd-mailform" id="form" data-form-output="form-output-global" data-form-type="contact" method="post" action="submit/" > {% csrf_token %}
             <div class="row row-14 gutters-14">
               <div class="col-md-4">
                 <div class="form-wrap">
@@ -110,14 +96,19 @@
                 </div>
               </div>
             </div>
-            <button class="button button-primary button-pipaluk" type="submit">Enviar Mensagem</button>
+            <button class="button button-primary button-pipaluk" type="submit"> Enviar Mensagem</button>
           </form>
         </div>
       </section>
 
     </div>
-    <!-- Global Mailform Output-->
-    {% comment %} <div class="snackbars" id="form-output-global">
-    </div> {% endcomment %}
 
+<script>
+  
+  let form = document.getElementById('form'); 
+
+  form.addEventListener('submit', function(event) { // 1
+      alert("Mensagem enviado com sucesso!");
+  })
+  </script>
 {%endblock%}

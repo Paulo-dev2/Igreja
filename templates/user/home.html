@@ -52,7 +52,7 @@
                   <!-- Nav tabs-->
                   <ul class="nav nav-tabs">
                     <li class="nav-item" role="presentation"><a class="nav-link active" href="#tabs-7-1" data-toggle="tab">Cultos</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="#tabs-7-2" data-toggle="tab">Programções</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="#tabs-7-2" data-toggle="tab">Programações</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="#tabs-7-3" data-toggle="tab">Live</a></li>
                   </ul>
                   <!-- Tab panes-->
@@ -80,25 +80,43 @@
         <div class="container">
           <h3>Agendas</h3>
           <div class="row row-30">
-            {% for agenda in agendas %}
-              {% if agenda.agenda_ativa %}
-                <div class="col-sm-6 col-lg-4">
-                  <article class="box-icon-classic">
-                    <div class="unit box-icon-classic-body flex-column flex-md-row text-md-left flex-lg-column text-lg-center flex-xl-row text-xl-left">
-                      <div class="unit-left">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar" viewBox="0 0 16 16">
-                          <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
-                        </svg>
+            {% if agendas.count > 0 %}
+              {% for agenda in agendas %}
+                  <div class="col-sm-6 col-lg-4">
+                    <article class="box-icon-classic">
+                      <div class="unit box-icon-classic-body flex-column flex-md-row text-md-left flex-lg-column text-lg-center flex-xl-row text-xl-left">
+                        <div class="unit-left">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar" viewBox="0 0 16 16">
+                            <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
+                          </svg>
+                        </div>
+                        <div class="unit-body">
+                          <h5 class="box-icon-classic-title"><a href="#">{{agenda.name}}</a></h5>
+                          <p class="box-icon-classic-text">{{agenda.data_start}}</p>
+                        </div>
                       </div>
-                      <div class="unit-body">
-                        <h5 class="box-icon-classic-title"><a href="#">{{agenda.name}}</a></h5>
-                        <p class="box-icon-classic-text">{{agenda.data_start}}</p>
-                      </div>
-                    </div>
-                  </article>
+                    </article>
+                  </div>
+              {% endfor %}
+            {% else %}
+
+            <div class="col-sm-6 col-lg-4">
+              <article class="box-icon-classic">
+                <div class="unit box-icon-classic-body flex-column flex-md-row text-md-left flex-lg-column text-lg-center flex-xl-row text-xl-left">
+                  <div class="unit-left">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar" viewBox="0 0 16 16">
+                      <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
+                    </svg>
+                  </div>
+                  <div class="unit-body">
+                    <h5 class="box-icon-classic-title"><a href="#">SEM AGENDA!!</a></h5>
+                    <p class="box-icon-classic-text">00/00/0000</p>
+                  </div>
                 </div>
-              {% endif %}
-            {% endfor %}
+              </article>
+            </div>
+
+            {% endif %}
         </div>
       </section>
       <!-- Hot tours-->
@@ -128,8 +146,9 @@
         <div class="container">
           <h3 class="oh-desktop"><span class="d-inline-block wow slideInDown">Eventos</span></h3>
           <div class="row row-sm row-40 row-md-50">
-            {% for event in eventos %}
-              {% if event.evento_ativo_mes %}
+            {% if eventos.count > 0 %}
+              {% for event in eventos %}
+                {% if event.evento_ativo_mes %}
               <div class="col-sm-6 col-md-12 wow fadeInRight">
                 <!-- Product Big-->
                 <article class="product-big">
@@ -148,6 +167,24 @@
               </div>
               {% endif %}
             {% endfor%}
+            {%else%}
+            <div class="col-sm-6 col-md-12 wow fadeInRight">
+              <!-- Product Big-->
+              <article class="product-big">
+                <div class="unit flex-column flex-md-row align-items-md-stretch">
+                  <div class="unit-left"><a class="product-big-figure" href="#"><img src="{%static '/img/eventos_vazios.jpg'%}" alt="" width="600" height="366"/></a></div>
+                  <div class="unit-body">
+                    <div class="product-big-body">
+                      <h5 class="product-big-title"><a href="#">Sem eventos!!</a></h5>
+                      <p class="product-big-text">Departamento: Nenhum</p>
+                      <p class="product-big-text">Dia/Hora incio: 00/00/0000</p>
+                      <p class="product-big-text">Dia/Hora FInal: 00/00/0000</p>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            </div>
+            {%endif%}
           </div>
         </div>
       </section>
@@ -189,56 +226,56 @@
       <!--	Instagrram wondertour-->
       <section class="section section-sm section-top-0 section-fluid section-relative bg-gray-4">
         <div class="container-fluid">
-          <h6 class="gallery-title">Gallery</h6>
+          <h6 class="gallery-title">Galeria</h6>
           <!-- Owl Carousel-->
           <div class="owl-carousel owl-classic owl-dots-secondary" data-items="1" data-sm-items="2" data-md-items="3" data-lg-items="4" data-xl-items="5" data-xxl-items="6" data-stage-padding="15" data-xxl-stage-padding="0" data-margin="30" data-autoplay="true" data-nav="true" data-dots="true">
             <!-- Thumbnail Classic-->
             <article class="thumbnail thumbnail-mary">
-              <div class="thumbnail-mary-figure"><img src="{%static 'assets/images/gallery-image-1-270x195.jpg'%}" alt="" width="270" height="195"/>
+              <div class="thumbnail-mary-figure"><img src="{%static '/img/galery1.jpeg'%}" alt="" style="width:26vw;height:26vh"/>
               </div>
-              <div class="thumbnail-mary-caption"><a class="icon fl-bigmug-line-zoom60" href="{%static 'assets/images/gallery-image-1-1200x800-original.jpg'%}" data-lightgallery="item"><img src="{%static 'assets/images/gallery-image-1-270x195.jpg'%}" alt="" width="270" height="195"/></a>
-              </div>
-            </article>
-            <!-- Thumbnail Classic-->
-            <article class="thumbnail thumbnail-mary">
-              <div class="thumbnail-mary-figure"><img src="{%static 'assets/images/gallery-image-2-270x195.jpg'%}" alt="" width="270" height="195"/>
-              </div>
-              <div class="thumbnail-mary-caption"><a class="icon fl-bigmug-line-zoom60" href="assets/images/gallery-image-2-1200x800-original.jpg" data-lightgallery="item"><img src="{%static 'assets/images/gallery-image-2-270x195.jpg'%}" alt="" width="270" height="195"/></a>
+              <div class="thumbnail-mary-caption"><img src="{%static '/img/galery1.jpeg'%}" alt="" width="270" height="195"/>
               </div>
             </article>
             <!-- Thumbnail Classic-->
             <article class="thumbnail thumbnail-mary">
-              <div class="thumbnail-mary-figure"><img src="{%static 'assets/images/gallery-image-3-270x195.jpg'%}" alt="" width="270" height="195"/>
+              <div class="thumbnail-mary-figure"><img src="{%static '/img/galery2.jpeg'%}" alt="" style="width:26vw;height:26vh"/>
               </div>
-              <div class="thumbnail-mary-caption"><a class="icon fl-bigmug-line-zoom60" href="{%static 'assets/images/gallery-image-3-1200x800-original.jpg'%}" data-lightgallery="item"><img src="assets/images/gallery-image-3-270x195.jpg" alt="" width="270" height="195"/></a>
-              </div>
-            </article>
-            <!-- Thumbnail Classic-->
-            <article class="thumbnail thumbnail-mary">
-              <div class="thumbnail-mary-figure"><img src="{%static 'assets/images/gallery-image-4-270x195.jpg'%}" alt="" width="270" height="195"/>
-              </div>
-              <div class="thumbnail-mary-caption"><a class="icon fl-bigmug-line-zoom60" href="{%static 'assets/images/gallery-image-4-1200x800-original.jpg'%}" data-lightgallery="item"><img src="{%static 'assets/images/gallery-image-4-270x195.jpg'%}" alt="" width="270" height="195"/></a>
+              <div class="thumbnail-mary-caption"><img src="{%static '/img/galery2.jpeg'%}" alt="" width="270" height="195"/>
               </div>
             </article>
             <!-- Thumbnail Classic-->
             <article class="thumbnail thumbnail-mary">
-              <div class="thumbnail-mary-figure"><img src="{%static 'assets/images/gallery-image-5-270x195.jpg'%}" alt="" width="270" height="195"/>
+              <div class="thumbnail-mary-figure"><img src="{%static '/img/galery3.jpeg'%}" alt="" style="width:26vw;height:26vh"/>
               </div>
-              <div class="thumbnail-mary-caption"><a class="icon fl-bigmug-line-zoom60" href="{%static 'assets/images/gallery-image-5-1200x800-original.jpg'%}" data-lightgallery="item"><img src="{%static 'assets/images/gallery-image-5-270x195.jpg'%}" alt="" width="270" height="195"/></a>
-              </div>
-            </article>
-            <!-- Thumbnail Classic-->
-            <article class="thumbnail thumbnail-mary">
-              <div class="thumbnail-mary-figure"><img src="{%static 'assets/images/gallery-image-6-270x195.jpg'%}" alt="" width="270" height="195"/>
-              </div>
-              <div class="thumbnail-mary-caption"><a class="icon fl-bigmug-line-zoom60" href="{%static 'assets/images/gallery-image-6-1200x800-original.jpg'%}" data-lightgallery="item"><img src="{%static 'assets/images/gallery-image-6-270x195.jpg'%}" alt="" width="270" height="195"/></a>
+              <div class="thumbnail-mary-caption"><img src="{%static '/img/galery3.jpeg'%}" alt="" width="270" height="195"/>
               </div>
             </article>
             <!-- Thumbnail Classic-->
             <article class="thumbnail thumbnail-mary">
-              <div class="thumbnail-mary-figure"><img src="{%static 'assets/images/gallery-image-7-270x195.jpg'%}" alt="" width="270" height="195"/>
+              <div class="thumbnail-mary-figure"><img src="{%static '/img/galery4.jpeg'%}" alt="" style="width:26vw;height:26vh"/>
               </div>
-              <div class="thumbnail-mary-caption"><a class="icon fl-bigmug-line-zoom60" href="{%static 'assets/images/gallery-image-7-1200x800-original.jpg'%}" data-lightgallery="item"><img src="{%static 'assets/images/gallery-image-7-270x195.jpg'%}" alt="" width="270" height="195"/></a>
+              <div class="thumbnail-mary-caption"><img src="{%static '/img/galery4.jpeg'%}" alt="" width="270" height="195"/>
+              </div>
+            </article>
+            <!-- Thumbnail Classic-->
+            <article class="thumbnail thumbnail-mary">
+              <div class="thumbnail-mary-figure"><img src="{%static '/img/galery5.jpeg'%}" alt="" style="width:26vw;height:26vh"/>
+              </div>
+              <div class="thumbnail-mary-caption"><img src="{%static '/img/galery5.jpeg'%}" alt="" width="270" height="195"/>
+              </div>
+            </article>
+            <!-- Thumbnail Classic-->
+            <article class="thumbnail thumbnail-mary">
+              <div class="thumbnail-mary-figure"><img src="{%static '/img/galery6.jpeg'%}" alt="" style="width:26vw;height:26vh"/>
+              </div>
+              <div class="thumbnail-mary-caption"><img src="{%static '/img/galery6.jpeg'%}" alt="" width="270" height="195"/>
+              </div>
+            </article>
+            <!-- Thumbnail Classic-->
+            <article class="thumbnail thumbnail-mary">
+              <div class="thumbnail-mary-figure"><img src="{%static '/img/galery7.jpeg'%}" alt="" style="width:26vw;height:26vh"/>
+              </div>
+              <div class="thumbnail-mary-caption"><img src="{%static '/img/galery7.jpeg'%}" alt="" width="270" height="195"/>
               </div>
             </article>
           </div>

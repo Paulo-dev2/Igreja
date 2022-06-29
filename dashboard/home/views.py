@@ -1,19 +1,16 @@
-from django.shortcuts import render,HttpResponse,redirect
+from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse, HttpResponseRedirect
-from django.template import loader
-from django.urls import reverse
 from core.models import Agenda,Evento,Dizimo,Oferta
 from datetime import datetime
 
 @login_required(login_url="/dashboard/login/")
 def index(request):
+    user = request.user
+    admin = user.is_staff
     agenda = Agenda.objects.all()
     eventos = Evento.objects.all()
     dizimo = Dizimo.objects.all().values()
     oferta = Oferta.objects.all().values()
-    #contas = Conta.objects.all().values()
-
     soma_dizimo = 0
     soma_oferta = 0
 
@@ -89,6 +86,8 @@ def index(request):
         'hoje':valorRealHoje,
         'mes':valorRealMes,
         'ano': valorRealAno,
+        'username':user,
+        'admin': admin,
         #'saida':data_entrada
     }
     return render(request,'home/index.html',context)

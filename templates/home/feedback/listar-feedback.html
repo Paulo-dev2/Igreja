@@ -60,9 +60,10 @@
                                                     <td>{{ fb.name_from }}</td>
                                                     <td>{{ fb.email_from }}</td>
                                                     <td>{{ fb.telefone }}</td>
-                                                    <td>{{ fb.text_from }}</td>
+                                                    <td>{{ fb.text_from | slice:"0:20"}}</td>
                                                     <td>
                                                         <a href="/dashboard/deletar/feedback/{{fb.id}}" type="submit" class="btn btn-danger"  >Deletar</a>
+                                                        <a href="/dashboard/details/feedback/{{fb.id}}" type="submit" class="btn btn-success"  >Details</a>
                                                     </td>
                                                 </tr>
                                                 {% endfor %}

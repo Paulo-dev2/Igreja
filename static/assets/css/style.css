@@ -3016,10 +3016,7 @@ p.text-muted {
     -webkit-box-shadow: none;
             box-shadow: none;
   }
-  .pcoded-navbar.theme-horizontal .pcoded-inner-navbar .pcoded-hasmenu.pcoded-trigger > .pcoded-submenu .pcoded-trigger > .pcoded-submenu:before,
-  .pcoded-navbar.theme-horizontal .pcoded-inner-navbar .pcoded-hasmenu.pcoded-trigger > .pcoded-submenu .pcoded-trigger.edge > .pcoded-submenu:before {
-    display: none;
-  }
+
 }
 /* ==========================    Rsponsive Menu  end   ====================== */
 /* ******************************************************************************* */

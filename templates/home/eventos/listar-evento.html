@@ -41,50 +41,40 @@
                             </div>
                             <div class="card-block table-border-style">
                                 <div class="table-responsive">
-                                    <table class="table table-hover" id="TableDT">
+                                    <table class="table table-hover" id="TableEvent">
                                         <form id="form" method="post"> {% csrf_token %}
                                             <thead>
                                                 <tr>
-                                                    <th>Image</th>
-                                                    <th>Nome</th>
+                                                    <th>Image - Nome</th>
                                                     <th>Vinculo</th>
-                                                    <th>Valor</th>
                                                     <th>Dia e Hora que começa</th>
                                                     <th>Dia e Hora que Termina</th>
-                                                    <th class="text-right">Ação</th>
+                                                    <th class="text-center">Ação</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tbody>
-                                                    {% for event in evento %}
-                                                    <tr>
-                                                        <td>
-                                                            <img class="rounded-circle m-r-10" style="width:40px;" src="{{media_url}}{{event.image}}" alt="activity-user" />
-                                                        </td>
-                                                        <td>
-                                                            <h6 class="m-0">{{ event.name }}</h6>
-                                                        </td>
-                                                        <td>
-                                                            <h6 class="m-0">{{ event.vinculo }}</h6>
-                                                        </td>
-                                                        <td>
-                                                            <h6 class="m-0">{{ event.get_value_formatado }}</h6>
-                                                        </td>
-                                                        <td>
-                                                            <h6 class="m-0 text-c-black">{{ event.get_data_start_evento }}</h6>
-                                                        </td>
-                                                        <td>
-                                                            <h6 class="m-0 text-c-black">{{ event.get_data_end_evento }}</h6>
-                                                        </td>
-                                                        <td class="text-right">
-                                                            <a href="/dashboard/deletar/evento/{{event.id}}" class="label theme-bg2 text-white f-12">Deletar</a>
-                                                            <a href="/dashboard/pages/editar-evento/{{event.id}}" class="label theme-bg text-white f-12">Editar</a>
-                                                        </td>
-                                                    </tr>
-                                                    {% endfor %}
-                                                </tbody>
+                                                {% for event in evento %}
+                                                        <tr>
+                                                            <td>
+                                                                <h6 class="m-0"><img class="rounded-circle m-r-10" style="width:5vw;heigth:10vh;" src="{{media_url}}{{event.image}}" alt="activity-user">{{ event.name }}</h6>
+                                                            </td>
+                                                            <td>
+                                                                <h6 class="m-0">{{ event.vinculo }}</h6>
+                                                            </td>
+                                                            <td>
+                                                                <h6 class="m-0 text-c-green">{{ event.get_data_start_evento }}</h6>
+                                                            </td>
+                                                            <td>
+                                                                <h6 class="m-0 text-c-red">{{ event.get_data_end_evento }}</h6>
+                                                            </td>
+                                                            <td>
+                                                                <a href="/dashboard/deletar/evento/{{event.id}}" type="submit" class="btn btn-danger" >Deletar</a>
+                                                                <a href="/dashboard/pages/editar-evento/{{event.id}}" type="submit" class="btn btn-success">Editar</a>
+                                                            </td>
+                                                        </tr>
+                                                {% endfor %}
                                             </tbody>
-                                        </form>
+                                        </form>        
                                     </table>
                                 </div>
                             </div>
@@ -102,7 +92,7 @@
 {% block javascripts %}
 <script>
     $(document).ready( function () {
-        $('#TableDT').DataTable({
+        $('#TableEvent').DataTable({
             responsive: true,
             // "bSort": false,
             "aaSorting": [],

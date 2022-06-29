@@ -4,7 +4,7 @@
 {% block stylesheet %} <link rel="stylesheet" href="/static/assets/css/style2.css"> {% endblock%}
 
 {% block content %}
-  <div class="ie-panel"><a href="http://windows.microsoft.com/en-US/internet-explorer/"><img src="images/ie8-panel/warning_bar_0000_us.jpg" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."></a></div>
+  <div class="ie-panel"><a href="http://windows.microsoft.com/en-US/internet-explorer/"><img src="{%static 'images/ie8-panel/warning_bar_0000_us.jpg' %}" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."></a></div>
     <div class="preloader">
       <div class="preloader-body">
         <div class="cssload-container">
@@ -47,22 +47,36 @@
                                     </div>
             
                                     <div class="row mb-2">
-                                    {% for p in posts %}
-                                      <div class="col-md-6">
-                                          <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                                    {%if posts.count > 0%}
+                                      {% for p in posts %}
+                                        <div class="col-md-6" style="border-right: 3px solid #FFFFFF;">
+                                          <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative" style="height:45vh;width:40vw">
                                             <div class="col p-4 d-flex flex-column position-static">
                                               <strong class="d-inline-block mb-2 text-success">{{p.author}}</strong>
                                               <h3 class="mb-0">{{p.title}}</h3>
                                               <div class="mb-1 text-muted">{{p.get_data_formatado}}</div>
-                                              <p class="mb-auto">{{p.resumo}}</p>
+                                              <p class="mb-auto">{{p.resumo | slice:"0:100"}}</p>
                                               <a href="{{p.id}}" class="stretched-link">Continue Lendo</a>
                                             </div>
                                             <div class="col-auto d-none d-lg-block">
-                                              <img class="bd-placeholder-img" style="height:35.97vh;width:16vw" src="{{media_url}}{{p.image}}" alt="Imagem de capa do card">
+                                              <img class="bd-placeholder-img" style="height:37vh;width:16vw" src="{{media_url}}{{p.image}}" alt="Imagem de capa do card">
                                             </div>
                                           </div>
                                         </div>
-                                    {% endfor %}
+                                      {% endfor %}
+                                      {%else%}
+                                        <div class="col-md-6" style="border-right: 3px solid #FFFFFF;">
+                                          <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative" style="height:45vh;width:40vw">
+                                            <div class="col p-4 d-flex flex-column position-static">
+                                              <h3 class="mb-0">Sem Postagens</h3>
+                                              <div class="mb-1 text-muted">00/00/0000</div>
+                                            </div>
+                                            <div class="col-auto d-none d-lg-block">
+                                              <img class="bd-placeholder-img" style="height:37vh;width:16vw" src="{%static 'img/post-vazio.jpg'%}" alt="Imagem de capa do card">
+                                            </div>
+                                          </div>
+                                        </div>
+                                    {%endif%}
                                   </div> 
                                 </div>
                                 </form>
@@ -79,3 +93,4 @@
     <!-- Global Mailform Output-->
     <div class="snackbars" id="form-output-global"></div>
 {% endblock %}
+

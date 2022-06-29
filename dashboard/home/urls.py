@@ -3,7 +3,7 @@
 Copyright (c) 2019 - present AppSeed.us
 """
 
-from django.urls import path, re_path
+from django.urls import path
 from . import views
 from dashboard.home.api.views import Dashboard
 from dashboard.home.pages.views import Pages
@@ -36,9 +36,10 @@ urlpatterns = [
     path('pages/listar-evento/', Pages.ListarEvento),
     path('pages/listar-feedback/', Pages.ListaFeedback),
     path('pages/listar-slide/',Pages.ListaSlides),
-    path('details-post/<int:id>', Pages.DetailPost),
     path('pages/listar-user/', Pages.ListarUser),
-
+    
+    path('details-post/<int:id>', Pages.DetailPost),
+    path('details/feedback/<int:id>', Pages.DetailsFeedback),
 
     path('pages/editar-agenda/<int:id>', Pages.editarAgenda),
     path('pages/editar-dizimo/<int:id>', Pages.editarDizimo),
@@ -63,7 +64,6 @@ urlpatterns = [
     path("deletar/slide/<int:id>",Dashboard.deletar_slide),
     path('deletar/user/<int:id>', Dashboard.DeleteUser),
 
-
     path('editar-agenda/', Dashboard.EditarAgenda),
     path('editar-dizimo/', Dashboard.EditarDizimo),
     path('editar-oferta/', Dashboard.EditarOferta),
@@ -71,4 +71,7 @@ urlpatterns = [
     path('pages/editar-evento/submit', Pages.addEvento),
     path('pages/editar-slide/submit', Pages.addSlideData),
     path('pages/editar-user/submit', Pages.EditarUserData),
+
+    path('pages/profile',Pages.Profile),
+    path('pages/profile/submit',Pages.ProfileData)
 ]

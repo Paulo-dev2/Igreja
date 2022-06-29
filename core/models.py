@@ -19,8 +19,6 @@ class Agenda(models.Model):
         return self.data_start.strftime('%Y-%m-%dT%H:%M')
     
     def agenda_ativa(self):
-        print(self.data_start.strftime('%d/%m/%Y %H:%M Hrs'))
-        print(datetime.now().strftime('%d/%m/%Y %H:%M Hrs'))
         mes_now =  datetime.now().strftime('%d/%m/%Y %H:%M Hrs').split(" ")[0].split("/")[1]
         mes_start =  self.data_start.strftime('%d/%m/%Y %H:%M Hrs').split(" ")[0].split("/")[1]
 
@@ -38,21 +36,12 @@ class Evento(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100)
     image = models.ImageField(upload_to = 'eventos/',help_text="Size: 1920x570",blank=True)
-    quantidade_ingressos = models.IntegerField(blank=True)
-    preco = models.FloatField(blank=True,null=True)
     vinculo = models.CharField(max_length=70,blank=True)
     data_start = models.DateTimeField()
     data_end = models.DateTimeField()
 
     def __str__(self):
         return self.name
-
-    def __data_now(self):
-        return datetime.now().strftime('%d/%m/%Y %H:%M Hrs')
-    def get_value_formatado(self):
-        valorReal = f'{self.preco:_.2f}'
-        valorReal = valorReal.replace('.',',').replace('_','.')
-        return valorReal
 
     def get_data_start_evento(self):
         return self.data_start.strftime('%d/%m/%Y %H:%M Hrs')
@@ -101,14 +90,6 @@ class Evento(models.Model):
         ano_start = self.data_start.strftime('%d/%m/%Y %H:%M Hrs').split(' ')[0].split('/')[2]    
         if ano_start == now_ano: return True
         else: return False
-
-""" class Cargo(models.Model):
-    id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=100)
-    setor = models.CharField(max_length=50)
-    descrition = models.TextField()
-    def __str__(self):
-        return self.name """
 
 class Slide(models.Model):
     caption1 = models.CharField(max_length=100)
