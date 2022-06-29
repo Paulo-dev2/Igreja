@@ -6,7 +6,7 @@ from datetime import datetime
 @login_required(login_url="/dashboard/login/")
 def index(request):
     user = request.user
-    admin = user.is_staff
+    admin = user.is_superuser
     agenda = Agenda.objects.all()
     eventos = Evento.objects.all()
     dizimo = Dizimo.objects.all().values()
@@ -16,8 +16,6 @@ def index(request):
 
     for i in range(len(dizimo)): soma_dizimo += dizimo[i]["value"]
     for i in range(len(oferta)): soma_oferta += oferta[i]["value"]
-
-    soma_tudo = soma_dizimo + soma_oferta
 
     data_agora = str(
         datetime.now().strftime('%d/%m/%Y %H:%M Hrs')

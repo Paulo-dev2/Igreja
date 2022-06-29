@@ -15,7 +15,7 @@ class Pages:
     def addAgenda(req):
         if req.method == 'GET':
             user = req.user
-            admin = user.is_staff
+            admin = user.is_superuser
             context = {'username':user,"admin":admin}
             html_template = loader.get_template('home/agenda/' + "add-agenda" + ".html")
             return HttpResponse(html_template.render(context, req))
@@ -25,7 +25,7 @@ class Pages:
     def listaAgenda(req):
         if req.method == 'GET':
             user = req.user
-            admin = user.is_staff
+            admin = user.is_superuser
             agenda = Agenda.objects.all()
             context = {
                 'agenda': agenda,
@@ -40,7 +40,7 @@ class Pages:
         if req.method == 'GET':
             if id != 0:
                 user = req.user
-                admin = user.is_staff
+                admin = user.is_superuser
                 try:
                     dados = {'username':user,'admin':admin}
                     dados['agenda'] = Agenda.objects.get(id=id)
@@ -53,7 +53,7 @@ class Pages:
     def addDizimo(req):
         if req.method == 'GET':
             user = req.user
-            admin = user.is_staff
+            admin = user.is_superuser
             context = {'username':user,'admin':admin}
             html_template = loader.get_template('home/dizimo/' + "add-dizimo" + ".html")
             return HttpResponse(html_template.render(context, req))
@@ -62,7 +62,7 @@ class Pages:
     def listarDizimo(req):
         if req.method == 'GET':
             user = req.user
-            admin = user.is_staff
+            admin = user.is_superuser
             dizimo = Dizimo.objects.all()
             context = {
                 'dizimo': dizimo,
@@ -77,7 +77,7 @@ class Pages:
         if req.method == 'GET':
             if id != 0:
                 user = req.user
-                admin = user.is_staff
+                admin = user.is_superuser
                 try:
                     dados = {'username':user,'admin':admin}
                     dados['dizimo'] = Dizimo.objects.get(id=id)
@@ -89,7 +89,7 @@ class Pages:
     def addOferta(req):
         if req.method == 'GET':
             user = req.user
-            admin = user.is_staff
+            admin = user.is_superuser
             context = {'username':user,'admin':admin}
             html_template = loader.get_template('home/oferta/' + "add-oferta" + ".html")
             return HttpResponse(html_template.render(context, req))
@@ -99,7 +99,7 @@ class Pages:
         if req.method == 'GET':
             oferta = Oferta.objects.all()
             user = req.user
-            admin = user.is_staff
+            admin = user.is_superuser
             context = {
                 'oferta': oferta,
                 'username':user,
@@ -113,7 +113,7 @@ class Pages:
         if req.method == 'GET':
             if id != 0:
                 user = req.user
-                admin = user.is_staff
+                admin = user.is_superuser
                 try:
                     dados = {'username':user,'admin':admin}
                     dados['oferta'] = Oferta.objects.get(id=id)
@@ -126,7 +126,7 @@ class Pages:
         if req.method == 'POST':
             form = PostForm(req.POST)
             user = req.user
-            admin = user.is_staff
+            admin = user.is_superuser
             context = {'form':form,'username':user,'admin':admin}
            
         else:
@@ -172,7 +172,7 @@ class Pages:
     def ListarPost(req):
         if req.method == 'GET':
             user = req.user
-            admin = user.is_staff
+            admin = user.is_superuser
             post = Post.objects.all()
             context = {
                 'post': post,
@@ -187,7 +187,7 @@ class Pages:
     def DetailPost(req,id):
         if req.method == 'GET':
             user = req.user
-            admin = user.is_staff
+            admin = user.is_superuser
             dados = {'username':user,'admin':admin}
             dados['post'] = Post.objects.get(id=id)
             return render(req,'home/post/details-post.html',dados)
@@ -197,7 +197,7 @@ class Pages:
         if req.method == 'GET':
             if id != 0:
                 user = req.user
-                admin = user.is_staff
+                admin = user.is_superuser
                 try:
                     item = Post.objects.get(id=id)
                     dados = {'username':user,'admin':admin}
@@ -211,7 +211,7 @@ class Pages:
     def addEventos(req):
         if req.method == 'GET':
             user = req.user
-            admin = user.is_staff
+            admin = user.is_superuser
             context = {'username':user,'admin':admin}
             return render(req,"home/eventos/add-evento.html",context)
 
@@ -254,7 +254,7 @@ class Pages:
         if req.method == 'GET':
             if id != 0:
                 user = req.user
-                admin = user.is_staff
+                admin = user.is_superuser
                 try:
                     dados = {'username':user,'admin':admin}
                     dados['evento'] = Evento.objects.get(id=id)
@@ -266,7 +266,7 @@ class Pages:
     def ListarEvento(req):
         evento = Evento.objects.all()
         user = req.user
-        admin = user.is_staff
+        admin = user.is_superuser
         context = {
             'evento': evento,
             'media_root': MEDIA_ROOT,
@@ -281,7 +281,7 @@ class Pages:
         if req.method == 'GET':
             feedback = Contato.objects.all()
             user = req.user
-            admin = user.is_staff
+            admin = user.is_superuser
             context = {
                 'feedback': feedback,
                 'username':user,
@@ -295,7 +295,7 @@ class Pages:
             try:
                 feedback = Contato.objects.get(id=id)
                 user = req.user
-                admin = user.is_staff
+                admin = user.is_superuser
                 context = {
                     'feedback': feedback,
                     'username':user,
@@ -309,7 +309,7 @@ class Pages:
     def addSlide(req):
         if req.method == 'GET':
             user = req.user
-            admin = user.is_staff
+            admin = user.is_superuser
             context = {'username':user,'admin':admin}
             return render(req,"home/slides/add-slide.html",context)
 
@@ -349,7 +349,7 @@ class Pages:
     def ListaSlides(req):
         slide = Slide.objects.all()
         user = req.user
-        admin = user.is_staff
+        admin = user.is_superuser
         context = {
             'slide': slide,
             'media_root': MEDIA_ROOT,
@@ -364,7 +364,7 @@ class Pages:
         if req.method == 'GET':
             if id != 0:
                 user = req.user
-                admin = user.is_staff
+                admin = user.is_superuser
                 try:
                     dados = {'username':user,'admin':admin}
                     dados['slide'] = Slide.objects.get(id=id)
@@ -381,7 +381,7 @@ class Pages:
         msg = None
         success = False
         user = req.user
-        admin = user.is_staff
+        admin = user.is_superuser
 
         if req.method == "POST":
             form = SignUpForm(req.POST)
@@ -407,7 +407,7 @@ class Pages:
     def ListarUser(req):
         if req.method == 'GET':
             username = req.user
-            admin = username.is_staff
+            admin = username.is_superuser
             User = get_user_model()
             users = User.objects.all()
             return render(req, "home/user/listar-user.html", {"users":users,'username':username,'admin':admin})
@@ -439,7 +439,7 @@ class Pages:
         if req.method == 'GET':
             user = req.user
             id = user.id
-            admin = user.is_staff
+            admin = user.is_superuser
             User = get_user_model()
             users = User.objects.get(id=id)
             context = {'username':user,'admin':admin,'profile':users}
@@ -449,7 +449,7 @@ class Pages:
     def ProfileData(req):
         if req.method == 'POST':
             user = req.user
-            admin = user.is_staff
+            admin = user.is_superuser
 
             id = req.POST.get('id') if req.POST.get('id') else None
             first_name = req.POST.get('first_name') if req.POST.get('first_name') else None
@@ -461,12 +461,11 @@ class Pages:
 
                 User = get_user_model()
                 users = User.objects.get(id=id)
-                users.username = username
+                users.username = username.replace(" ","")
                 users.email = email
                 users.first_name = first_name
                 users.last_name = last_name
                 users.save()
-                print(first_name + ' ' + last_name)
                 return redirect("/dashboard/pages/profile")
             else:
                return redirect("/dashboard/pages/profile") 
